@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+<AnchorPane prefHeight="462.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.VentanaIniController">
+   <children>
+      <TextField fx:id="txtName" layoutX="193.0" layoutY="268.0" prefHeight="38.0" prefWidth="220.0" />
+      <TextField layoutX="194.0" layoutY="322.0" prefHeight="38.0" prefWidth="220.0" />
+      <Label layoutX="237.0" layoutY="231.0" text="¡Bienvenido a Potispo!" />
+      <Button layoutX="271.0" layoutY="383.0" mnemonicParsing="false" onAction="#showVentanaUsuario" text="Ingresar" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="228.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../soundcloud-2-icon-12-256.png" />
+         </image>
+      </ImageView>
+   </children>
+   <effect>
+      <ColorAdjust saturation="0.06" />
+   </effect>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>
