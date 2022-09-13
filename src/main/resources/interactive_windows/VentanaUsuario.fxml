@@ -4,9 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.WindowController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.Window2Controller">
    <children>
-      <Label layoutX="266.0" layoutY="182.0" text="soy muy gay" />
-      <Button layoutX="258.0" layoutY="283.0" mnemonicParsing="false" onAction="#showVentanaInicio" text="cerrar sesion" />
+      <Label fx:id="lblName" layoutX="280.0" layoutY="183.0" text="Label" />
+      <Button layoutX="274.0" layoutY="266.0" mnemonicParsing="false" onAction="#showVentanaInicio" text="Back" />
+      <Label fx:id="lblPassword" layoutX="280.0" layoutY="224.0" text="Label" />
    </children>
 </AnchorPane>
