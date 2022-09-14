@@ -1,11 +1,8 @@
 package interactive_windows;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class Window2Controller {
     private Window1Controller controllerVentanaInicio;
@@ -14,11 +11,13 @@ public class Window2Controller {
     private Label lblName;
     @FXML
     private Label lblPassword;
+
     @FXML
     void showVentanaInicio() {
         controllerVentanaInicio.show();
         stage.close();
     }
+
     public void init(String text, String usupasswordText, Stage stage, Window1Controller ventanaIniController) {
         lblName.setText(text);
         lblPassword.setText(usupasswordText);

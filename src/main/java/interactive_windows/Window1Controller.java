@@ -5,9 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class Window1Controller {
@@ -16,6 +17,21 @@ public class Window1Controller {
     private TextField txtName;
     @FXML
     private TextField usupassword;
+    @FXML
+    private Label popUp;
+    @FXML
+    public void cheking() throws IOException {
+        String name = "Juan";
+        String password = "12";
+
+        if (txtName.getText().equals(name) && usupassword.getText().equals(password)){
+            showVentanaUsuario();
+
+        } else{
+            popUp.setText("¡Ingrese usuario o contraseña valida!");
+            //System.out.println("hola");
+        }
+    }
 
     @FXML
     void showVentanaUsuario() throws IOException {
@@ -27,6 +43,7 @@ public class Window1Controller {
         stage.setScene(scene);
         controller.init(txtName.getText(), usupassword.getText(), stage, this);
         stage.show();
+        popUp.setText("");
         this.stage1.close();
     }
 
@@ -38,3 +55,4 @@ public class Window1Controller {
         stage1.show();
     }
 }
+

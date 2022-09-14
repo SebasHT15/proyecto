@@ -8,20 +8,38 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="462.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.Window1Controller">
    <children>
       <TextField fx:id="txtName" layoutX="194.0" layoutY="267.0" prefHeight="38.0" prefWidth="220.0" />
       <TextField fx:id="usupassword" layoutX="194.0" layoutY="321.0" prefHeight="38.0" prefWidth="220.0" />
-      <Label layoutX="244.0" layoutY="222.0" text="¡Bienvenido a Potispo!" />
-      <Button layoutX="270.0" layoutY="379.0" mnemonicParsing="false" onAction="#showVentanaUsuario" prefHeight="26.0" prefWidth="68.0" text="Ingresar" />
-      <Label layoutX="54.0" layoutY="278.0" text="Ingrese su usuario:" />
-      <Label layoutX="31.0" layoutY="332.0" text="Ingrese su contraseña:" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="229.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="241.0" layoutY="196.0" text="¡Bienvenido a Potispo!">
+         <font>
+            <Font name="Dubai Regular" size="14.0" />
+         </font></Label>
+      <Button fx:id="access" layoutX="270.0" layoutY="379.0" mnemonicParsing="false" onAction="#cheking" prefHeight="26.0" prefWidth="68.0" text="Login">
+         <font>
+            <Font name="Dubai Regular" size="14.0" />
+         </font></Button>
+      <Label layoutX="54.0" layoutY="276.0" text="Ingrese su usuario:">
+         <font>
+            <Font name="Dubai Regular" size="14.0" />
+         </font></Label>
+      <Label layoutX="32.0" layoutY="330.0" text="Ingrese su contraseña:">
+         <font>
+            <Font name="Dubai Regular" size="14.0" />
+         </font></Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="229.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@interactive_windows.images/potispo.png" />
          </image>
       </ImageView>
+      <Label fx:id="popUp" layoutX="200.0" layoutY="231.0">
+         <font>
+            <Font name="Dubai Regular" size="14.0" />
+         </font>
+      </Label>
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />
