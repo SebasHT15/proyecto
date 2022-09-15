@@ -35,7 +35,7 @@ public class MainSecundario {
 
 
         while (!response.equals("Q")) {
-            System.out.println("P = play, S = Stop, R = Reset, Q = Quit");
+            System.out.println("P = play, S = Stop, R = Reset, V = Skip, U = UpVolume, D = DownVolume, M = Mute, Q = Quit");
             System.out.print("Enter your choice: ");
 
             response = scanner.next();
