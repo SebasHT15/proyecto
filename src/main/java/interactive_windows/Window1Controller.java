@@ -9,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import listClasses.Reader;
+
 import java.io.IOException;
+
 
 public class Window1Controller {
     private Stage stage1;
@@ -19,12 +22,18 @@ public class Window1Controller {
     private TextField usupassword;
     @FXML
     private Label popUp;
+
+
     @FXML
     public void cheking() throws IOException {
+        listClasses.Reader lector_usuarios = new Reader();
+
+
         String name = "Juan";
         String password = "12";
+        //Esto es mal, hacer mejor usuaro y meterlo en lista
 
-        if (txtName.getText().equals(name) && usupassword.getText().equals(password)){
+        if (txtName.getText().equals(lector_usuarios.ver_nombre_usuario("C:\\Users\\Adrian\\Desktop\\Usuarios.csv")) && usupassword.getText().equals(lector_usuarios.ver_contra_usuario("C:\\Users\\Adrian\\Desktop\\Usuarios.csv"))){
             showVentanaUsuario();
 
         } else{

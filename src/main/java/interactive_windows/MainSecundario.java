@@ -15,15 +15,14 @@ public class MainSecundario {
         Scanner scanner = new Scanner(System.in);
         Player player = new Player();
 
-        // Song zelda = new Song("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav");
-        // Song mario = new Song("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\mario.wav");
-
         Reader lector_csv = new Reader();
-        lector_csv.leerArchivo("C:\\Users\\Adrian\\Desktop\\canciones.csv");
+        //lector_csv.crear_canciones("C:\\Users\\Adrian\\Desktop\\canciones.csv");
+        lector_csv.crear_canciones("src\\main\\resources\\Canciones");
+
 
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(lector_csv.lista_canciones.getCurrent().getData().getUrl()));
-        //AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\Zelda.mp3");
-        //System.out.println(lector_csv.lista_canciones.getCurrent().getData().getUrl());
+
+
 
 
         Clip clip = AudioSystem.getClip();
@@ -43,6 +42,8 @@ public class MainSecundario {
 
             //while (player.duration(clip)>=player.framePosition(clip)+10000)
             switch (response) {
+                case ("Q"):
+                    break;
                 case ("B"):
                     System.out.println(player.duration(clip));
                     break;
