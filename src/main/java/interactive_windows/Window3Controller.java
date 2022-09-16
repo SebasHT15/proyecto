@@ -12,6 +12,11 @@ public class Window3Controller {
         controllerVentanaUsuario.show();
         stage.close();
     }
+    @FXML
+    void play(){
+        System.out.println("play");
+    }
+
     public void init_ventaReproductor(Stage stage, Window2Controller ventanaIniController) {
 
         this.controllerVentanaUsuario = ventanaIniController;

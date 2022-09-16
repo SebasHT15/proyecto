@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,16 +10,26 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.Window3Controller">
    <children>
-      <Button layoutX="25.0" layoutY="26.0" mnemonicParsing="false">
-         <graphic>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="333.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../Pictures/Rem%20y%20Ram.gif" />
-         </image>
-      </ImageView>
-      <Button fx:id="Back" layoutX="281.0" layoutY="288.0" mnemonicParsing="false" onAction="#showVentanaUsuario" text="Back" />
+      <Button fx:id="Back" layoutX="513.0" layoutY="339.0" mnemonicParsing="false" onAction="#showVentanaUsuario" text="Back" />
+      <ToolBar layoutX="63.0" layoutY="290.0" prefHeight="74.0" prefWidth="370.0">
+        <items>
+          <Button mnemonicParsing="false" text="Return" />
+            <Button fx:id="play" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#play">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@interactive_windows.images/Play_Button.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" text="Skip" />
+            <Button mnemonicParsing="false" text="Volume Up" />
+            <Button mnemonicParsing="false" text="Volume Down" />
+        </items>
+      </ToolBar>
    </children>
+   <effect>
+      <ColorAdjust saturation="0.04" />
+   </effect>
 </AnchorPane>
