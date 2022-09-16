@@ -33,7 +33,7 @@ public class Window1Controller {
         String password = "12";
         //Esto es mal, hacer mejor usuaro y meterlo en lista
 
-        if (txtName.getText().equals(lector_usuarios.ver_nombre_usuario("C:\\Users\\Adrian\\Desktop\\Usuarios.csv")) && usupassword.getText().equals(lector_usuarios.ver_contra_usuario("C:\\Users\\Adrian\\Desktop\\Usuarios.csv"))){
+        if (txtName.getText().equals(name) && usupassword.getText().equals(password)){
             showVentanaUsuario();
 
         } else{
@@ -50,7 +50,7 @@ public class Window1Controller {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        controller.init(txtName.getText(), usupassword.getText(), stage, this);
+        controller.init_ventanaUsuario(txtName.getText(), usupassword.getText(), stage, this);
         stage.show();
         popUp.setText("");
         this.stage1.close();

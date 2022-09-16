@@ -26,6 +26,7 @@
             <Font name="Dubai Regular" size="14.0" />
          </font>
       </Label>
+      <Button fx:id="reproductor" layoutX="268.0" layoutY="407.0" mnemonicParsing="false" onAction="#showVentanaReproductor" text="Reproductor" />
    </children>
    <effect>
       <ColorAdjust saturation="0.04" />
