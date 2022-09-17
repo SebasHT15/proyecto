@@ -35,6 +35,17 @@ public class Window2Controller {
         this.stage.close();
     }
 
+    @FXML
+    void showVentanaBibliotecas() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaBibliotecas.fxml"));
+        Parent root = loader.load();
+        Window4Controller controller = loader.getController();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        controller.init_ventanaBibliotecas(stage, this );
+        stage.show();
+    }
 
     public void init_ventanaUsuario(String text, String usupasswordText, Stage stage, Window1Controller ventanaIniController) {
         lblName.setText(text);
