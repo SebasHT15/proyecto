@@ -24,7 +24,7 @@ public class WindowLogin {
     @FXML
     public void cheking() throws IOException {
         Reader lectorUsuario = new Reader();
-        lectorUsuario.crear_usuario("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\copia 17_9_22\\usuarios.csv");
+        lectorUsuario.crear_usuario("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\proyecto\\usuarios.csv");
         //Esto es mal, hacer mejor usuaro y meterlo en lista
 
         for(int i = 0; i <= lectorUsuario.lista_usuarios.size()-1; i++){

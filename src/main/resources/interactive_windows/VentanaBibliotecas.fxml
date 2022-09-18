@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.WindowBibliotecas">
+<AnchorPane prefHeight="316.0" prefWidth="278.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.WindowBibliotecas">
    <children>
-      <Button layoutX="274.0" layoutY="349.0" mnemonicParsing="false" onAction="#showVentanaUsuario2" text="Back" />
+      <Button layoutX="119.0" layoutY="270.0" mnemonicParsing="false" onAction="#showVentanaUsuario2" text="Back">
+         <font>
+            <Font name="Dubai Regular" size="12.0" />
+         </font></Button>
+      <SplitPane fx:id="pane" dividerPositions="0.6818181818181818" layoutX="39.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0">
+         <items>
+            <VBox fx:id="label_pane" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="button_pane" prefHeight="200.0" prefWidth="100.0" />
+         </items>
+      </SplitPane>
+      <Label layoutX="39.0" layoutY="22.0" prefHeight="25.0" prefWidth="85.0" text="Bibliotecas">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
    </children>
+   <effect>
+      <ColorAdjust saturation="0.04" />
+   </effect>
 </AnchorPane>
