@@ -37,7 +37,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="14.0" layoutY="388.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" text="Info">
+      <Button layoutX="14.0" layoutY="388.0" mnemonicParsing="false" onAction="#showVentanaInfo" prefHeight="35.0" prefWidth="60.0" text="Info">
          <font>
             <Font name="Dubai Regular" size="14.0" />
          </font>

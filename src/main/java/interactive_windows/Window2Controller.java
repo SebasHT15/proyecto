@@ -6,22 +6,27 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import listClasses.Reader;
+import listClasses.Usuario;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Window2Controller {
+    private List<Usuario> listauser;
+    private Integer i;
     private Window1Controller controllerVentanaInicio;
     private Stage stage;
     @FXML
     private Label lblName;
     @FXML
     private Label lblPassword;
-
     @FXML
     void showVentanaInicio() {
         controllerVentanaInicio.show();
         stage.close();
     }
+
     @FXML
     void showVentanaReproductor() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaReproductor.fxml"));
@@ -47,11 +52,25 @@ public class Window2Controller {
         stage.show();
     }
 
-    public void init_ventanaUsuario(String text, String usupasswordText, Stage stage, Window1Controller ventanaIniController) {
+    @FXML
+    void showVentanaInfo() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaInfo.fxml"));
+        Parent root = loader.load();
+        Window5Controller controller = loader.getController();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        controller.init_ventanaInfo(stage, listauser.get(i).getUser(), listauser.get(i).getName(), listauser.get(i).getEmail(), listauser.get(i).getProvince(), this);
+        stage.show();
+    }
+
+    public void init_ventanaUsuario(List listausuario, Integer i, String text, String usupasswordText, Stage stage, Window1Controller ventanaIniController) {
         lblName.setText(text);
         lblPassword.setText(usupasswordText);
         this.controllerVentanaInicio = ventanaIniController;
         this.stage = stage;
+        this.listauser = listausuario;
+        this.i = i;
     }
 
     public void show(){
