@@ -1,11 +1,9 @@
 package interactive_windows;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class Window1Controller {
+public class WindowLogin {
     private Stage stage1;
     @FXML
     private TextField txtName;
@@ -44,7 +42,7 @@ public class Window1Controller {
     void showVentanaUsuario(List listauser, Integer i) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaUsuario.fxml"));
         Parent root = loader.load();
-        Window2Controller controller = loader.getController();
+        WindowUsuario controller = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);

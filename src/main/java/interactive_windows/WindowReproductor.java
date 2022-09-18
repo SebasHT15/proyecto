@@ -3,17 +3,21 @@ package interactive_windows;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
-public class Window4Controller {
-    private Window2Controller controllerVentanaUsuario;
+public class WindowReproductor {
+    private WindowUsuario controllerVentanaUsuario;
     private Stage stage;
 
     @FXML
-    void showVentanaUsuario2() {
+    void showVentanaUsuario() {
         controllerVentanaUsuario.show();
         stage.close();
     }
+    @FXML
+    void play(){
+        System.out.println("play");
+    }
 
-    public void init_ventanaBibliotecas(Stage stage, Window2Controller ventanaIniController) {
+    public void init_ventaReproductor(Stage stage, WindowUsuario ventanaIniController) {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;

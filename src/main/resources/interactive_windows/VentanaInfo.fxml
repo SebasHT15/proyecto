@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="270.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.Window5Controller">
+<AnchorPane prefHeight="270.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.WindowInfo">
    <children>
       <Label layoutX="16.0" layoutY="37.0" text="Usuario:" />
       <Label layoutX="14.0" layoutY="87.0" text="Nombre:" />

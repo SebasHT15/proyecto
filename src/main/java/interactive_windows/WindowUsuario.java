@@ -6,16 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import listClasses.Reader;
 import listClasses.Usuario;
 
 import java.io.IOException;
 import java.util.List;
 
-public class Window2Controller {
+public class WindowUsuario {
     private List<Usuario> listauser;
     private Integer i;
-    private Window1Controller controllerVentanaInicio;
+    private WindowLogin controllerVentanaInicio;
     private Stage stage;
     @FXML
     private Label lblName;
@@ -31,7 +30,7 @@ public class Window2Controller {
     void showVentanaReproductor() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaReproductor.fxml"));
         Parent root = loader.load();
-        Window3Controller controller = loader.getController();
+        WindowReproductor controller = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -44,7 +43,7 @@ public class Window2Controller {
     void showVentanaBibliotecas() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaBibliotecas.fxml"));
         Parent root = loader.load();
-        Window4Controller controller = loader.getController();
+        WindowBibliotecas controller = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -56,7 +55,7 @@ public class Window2Controller {
     void showVentanaInfo() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaInfo.fxml"));
         Parent root = loader.load();
-        Window5Controller controller = loader.getController();
+        WindowInfo controller = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -64,7 +63,7 @@ public class Window2Controller {
         stage.show();
     }
 
-    public void init_ventanaUsuario(List listausuario, Integer i, String text, String usupasswordText, Stage stage, Window1Controller ventanaIniController) {
+    public void init_ventanaUsuario(List listausuario, Integer i, String text, String usupasswordText, Stage stage, WindowLogin ventanaIniController) {
         lblName.setText(text);
         lblPassword.setText(usupasswordText);
         this.controllerVentanaInicio = ventanaIniController;

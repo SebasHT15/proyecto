@@ -14,7 +14,7 @@ public class main extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        Window1Controller controller = loader.getController();
+        WindowLogin controller = loader.getController();
         controller.setStage(stage);
         stage.show();
     }
