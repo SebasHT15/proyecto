@@ -4,13 +4,15 @@ import java.util.Date;
 
 public class Playlist {
     private String name_playlist;
-    private Date creation_date = new Date();
+    private String creation_date; //Veer como poner fecha de la compu
     private Integer number_songs;
+    private String songs_xml_url;
 
-    public Playlist(String name_playlist, Date creation_date, Integer number_songs) {
+    public Playlist(String name_playlist, String creation_date, Integer number_songs, String songs_xml_url) {
         this.name_playlist = name_playlist;
         this.creation_date = creation_date;
         this.number_songs = number_songs;
+        this.songs_xml_url = songs_xml_url;
     }
 
     public String name_playlist() {
@@ -21,11 +23,11 @@ public class Playlist {
         this.name_playlist = name_playlist;
     }
 
-    public Date creation_date() {
+    public String creation_date() {
         return creation_date;
     }
 
-    public void setCreation_date(Date creation_date) {
+    public void setCreation_date(String creation_date) {
         this.creation_date = creation_date;
     }
 

@@ -9,13 +9,17 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import listClasses.Reader;
 
+
+//Añadir boton para crear bibliotecas
 public class WindowBibliotecas {
     private WindowUsuario controllerVentanaUsuario;
 
     private Integer number_playlist=3;
     private Stage stage;
-    private Label[] label;
+    private Label[] superlabel;
+    private Label[] sublabel;
     private Button[] button;
 
     @FXML
@@ -34,20 +38,27 @@ public class WindowBibliotecas {
     public void init_ventanaBibliotecas(Stage stage, WindowUsuario ventanaIniController) {
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
+
+        Reader lector_playlist = new Reader();
+        lector_playlist.crear_bibliotecas("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\proyecto\\bibliotecas.csv");
         //this.number_playlist = 3;
 
-        label_pane.setSpacing(5);
-        Label[] label = new Label[number_playlist];
-        Button[] button = new Button[number_playlist];
+        button_pane.setSpacing(15);
+        Label[] superlabel = new Label[lector_playlist.getNumber_playlist()];
+        Label[] sublabel = new Label[lector_playlist.getNumber_playlist()];
+        Button[] button = new Button[lector_playlist.getNumber_playlist()];
 
 
-        for (int i = 0; i < label.length; i++) {
-            label[i] = new Label(); // This is missing in the original code
-            label[i].setFont(new Font("Arial",18));
+        for (int i = 0; i < superlabel.length; i++) {
+            superlabel[i] = new Label();
+            superlabel[i].setFont(new Font("Arial",18));
+            label_pane.getChildren().add(superlabel[i]);
+            superlabel[i].setText(lector_playlist.lista_playlist.get(i).name_playlist());
 
-            label_pane.getChildren().add((label[i]));
-
-            label[i].setText("Label "+i);
+            sublabel[i] = new Label();
+            sublabel[i].setFont(new Font("Arial",11));
+            label_pane.getChildren().add(sublabel[i]);
+            sublabel[i].setText("Canciones: "+lector_playlist.lista_playlist.get(i).number_songs()+"   "+"Fecha: "+lector_playlist.lista_playlist.get(i).creation_date());
 
             button[i]=new Button();
 

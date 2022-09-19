@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reader{
+    private Integer number_playlist = 0;
     private BufferedReader lector;
     private String linea;
     private String partes[] = null;
     public LinkedListSongs lista_canciones=new LinkedListSongs();
     public List<Usuario> lista_usuarios = new ArrayList(); //definir tamano
+    public List<Playlist> lista_playlist = new ArrayList<>();
 
     //Idea para el lector extraída de https://www.youtube.com/watch?v=uwn-Zkttux4
     /*public void crear_canciones(String nombreArchivo) {
@@ -44,6 +46,25 @@ public class Reader{
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    public void crear_bibliotecas(String nombreArchivo){
+        try {
+            lector = new BufferedReader(new FileReader(nombreArchivo));
+            while ((linea = lector.readLine()) != null) {
+                partes = linea.split(",");
+
+                Playlist playlist = new Playlist(partes[0], partes[1], Integer.parseInt(partes[2]), partes[3]);
+                lista_playlist.add(playlist);
+
+                number_playlist++;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public int getNumber_playlist(){
+        return this.number_playlist;
     }
 }
 
