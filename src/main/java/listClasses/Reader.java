@@ -11,26 +11,8 @@ public class Reader{
     private BufferedReader lector;
     private String linea;
     private String partes[] = null;
-    public LinkedListSongs lista_canciones=new LinkedListSongs();
     public List<Usuario> lista_usuarios = new ArrayList(); //definir tamano
     public List<Playlist> lista_playlist = new ArrayList<>();
-
-    //Idea para el lector extraída de https://www.youtube.com/watch?v=uwn-Zkttux4
-    /*public void crear_canciones(String nombreArchivo) {
-        try {
-            lector = new BufferedReader(new FileReader(nombreArchivo));
-            while ((linea = lector.readLine()) != null) {
-                partes = linea.split(",");
-
-                Song cancion = new Song(partes[1]);
-
-                lista_canciones.insertFirst(cancion);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }*/
 
     public void crear_usuario(String nombreArchivo){
         try {

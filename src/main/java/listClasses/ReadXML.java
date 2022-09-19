@@ -19,9 +19,7 @@ import java.util.List;
 public class ReadXML {
     private static CircularDoubleLinkedList listaSongs = new CircularDoubleLinkedList();
     private static List<String> atributosSong = new ArrayList<>();
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-        leerXml("PlayList.xml");
-    }
+
     public static void leerXml(String filepath) throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

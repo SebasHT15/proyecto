@@ -3,7 +3,6 @@ package interactive_windows;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import listClasses.CircularDoubleLinkedList;
-import listClasses.LinkedList;
 import listClasses.ReadXML;
 import org.xml.sax.SAXException;
 
