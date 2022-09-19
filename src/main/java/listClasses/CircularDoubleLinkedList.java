@@ -1,77 +1,82 @@
-//https://www.youtube.com/watch?v=J1T5VJ93SAk se hizo a partir de este video.
-
-
+//https://www.youtube.com/watch?v=gTOJPSVLuEk Este es funcional
 package listClasses;
 
+
 public class CircularDoubleLinkedList {
-    DoubleLinkedNode primero;
-    DoubleLinkedNode ultimo;
-
+    private DoubleLinkedNode fist;
+    private DoubleLinkedNode last;
     public CircularDoubleLinkedList(){
-        primero = null;
-        ultimo = null;
+        fist=null;
+        last=null;
     }
-
-    public void ingresarNodo(int dato){
-        DoubleLinkedNode nuevo = new DoubleLinkedNode();
-        nuevo.dato = dato;
-
-        if(primero == null){
-            primero = nuevo;
-            ultimo = primero;
-            primero.siguiente = ultimo;
-
-        }else{
-            ultimo.siguiente = nuevo;
-            nuevo.siguiente = primero;
-            ultimo = nuevo;
+    public void insert(Integer data){
+        DoubleLinkedNode newdoubleLinkedNode = new DoubleLinkedNode();
+        newdoubleLinkedNode.data=data;
+        if (fist==null){
+            fist=newdoubleLinkedNode;
+            last=newdoubleLinkedNode;
+            fist.next=fist;
+            last.previous=last;
+        }else {
+            last.next=newdoubleLinkedNode;
+            newdoubleLinkedNode.next=fist;
+            newdoubleLinkedNode.previous=last;
+            last=newdoubleLinkedNode;
+            fist.previous=last;
         }
     }
-
-    public void buscarNodo(int dato) {
-        DoubleLinkedNode actual = new DoubleLinkedNode();
-        actual = primero;
-        boolean encontrar = false;
-
-        do{
-            if(actual.dato == dato){
-                encontrar = true;
-            }
-
-            actual = actual.siguiente;
-
-        }while(actual != primero);
-        if (encontrar == true){
-            System.out.println("nodo encontrado");
-
-        }else{
-            System.out.println("no existe");
-        }
-    }
-
-    public void eliminarNodo(int dato){
-        DoubleLinkedNode actual = new DoubleLinkedNode();
-        DoubleLinkedNode anterior = new DoubleLinkedNode();
-        actual = primero;
-        anterior = ultimo;
-
-        do{
-            if(actual.dato == dato){
-                if(actual == primero){
-                    primero = primero.siguiente;
-                    ultimo.siguiente = primero;
-
-                }else if(actual == ultimo){
-                    anterior.siguiente = ultimo.siguiente;
-                    ultimo = anterior;
-                }else{
-                    anterior.siguiente = actual.siguiente;
+    public void delete(int x) {
+        DoubleLinkedNode current = new DoubleLinkedNode();
+        DoubleLinkedNode previous_temp = new DoubleLinkedNode();
+        current = fist;
+        previous_temp = last;
+        do {
+            if (current.data == x) {
+                if (current == fist){
+                    fist = fist.next;
+                    last.next = fist;
+                    fist.previous = last;
+                } else if (current == last) {
+                    last = previous_temp;
+                    fist.previous = last;
+                    last.next = fist;
+                }
+                else {
+                    previous_temp.next = current.next;
+                    current.next.previous = previous_temp;
                 }
             }
-            anterior = actual;
-            actual = actual.siguiente;
-        }while(actual != primero);
+            previous_temp = current;
+            current = current.next;
+        }while (current != fist);
     }
+    public void search(int x){
+        DoubleLinkedNode current = new DoubleLinkedNode();
+        current = last;
+        Boolean found = false;
+        do {
+            if (current.data == x){
+                found = true;
+            }
+            current=current.previous;
+        }while (current != last && found != true);
+        if (found == true){
+            System.out.println("encontrado");
+        }else {
+            System.out.println("no encontrado");
+        }
+    }
+    public void displayList(){
+        DoubleLinkedNode current = new DoubleLinkedNode();
+        current = fist;
+        if (fist != null){
+            do {
+                System.out.println(current.data);
+                current = current.next;
+            }while (current != fist);
 
-
+        }else {
+            System.out.println("vacia");
+        }
+    }
 }
