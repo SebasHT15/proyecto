@@ -30,11 +30,12 @@ public class MetadataXML {
 
         Song song2 = new Song("Motorola", "rock", "randall", "Mesa de madera", "80", "Yes mommy", "hola");
         ListaSongs.add(song2);
+        createXML("PlayList", ListaSongs);
 
-        createXML("PlayList", ListaSongs, "");
+        //eliminar_elementoXML("PlayList", ListaSongs, "");
     }
 
-    public static void createXML(String namePlaylist, List<Song> listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+    public static void createXML(String namePlaylist, List<Song> listaSongs) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -48,16 +49,81 @@ public class MetadataXML {
         Document leerdocumento = builder.parse(new File("PlayList.xml"));
 
         NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
-        Node nodo = listaCanciones.item(0);
 
         for (int i = 0; i <= listaSongs.size()-1; i++){
-            System.out.println(nodo);
+        Element Song = documento.createElement("Song");
+
+        Element Titulo = documento.createElement("Titulo");
+        Text textTitulo = documento.createTextNode(listaSongs.get(i).getTitule());
+        Titulo.appendChild(textTitulo);
+        Song.appendChild(Titulo);
+
+        Element Genero = documento.createElement("Genero");
+        Text textGenero = documento.createTextNode(listaSongs.get(i).getGenre());
+        Genero.appendChild(textGenero);
+        Song.appendChild(Genero);
+
+        Element Artista = documento.createElement("Artista");
+        Text textArtista = documento.createTextNode(listaSongs.get(i).getArtist());
+        Artista.appendChild(textArtista);
+        Song.appendChild(Artista);
+
+        Element Album = documento.createElement("Album");
+        Text textAlbum = documento.createTextNode(listaSongs.get(i).getAlbum());
+        Album.appendChild(textAlbum);
+        Song.appendChild(Album);
+
+        Element Year = documento.createElement("Year");
+        Text textYear = documento.createTextNode(listaSongs.get(i).getYear());
+        Year.appendChild(textYear);
+        Song.appendChild(Year);
+
+        Element Letra = documento.createElement("Letra");
+        Text textLetra = documento.createTextNode(listaSongs.get(i).getLyrics());
+        Letra.appendChild(textLetra);
+        Song.appendChild(Letra);
+
+        Element URL = documento.createElement("URL");
+        Text textURL = documento.createTextNode(listaSongs.get(i).getUrl());
+        URL.appendChild(textURL);
+        Song.appendChild(URL);
+
+        PlayList.appendChild(Song);
+        }
+
+        documento.getDocumentElement().appendChild(PlayList);
+
+        Source source = new DOMSource(documento);
+        Result result = new StreamResult(new File(namePlaylist + ".xml"));
+
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(source, result);
+    }
+    public static void eliminar_elementoXML(String namePlaylist, List<Song> listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        DOMImplementation implementation = builder.getDOMImplementation();
+
+        Document documento = implementation.createDocument(null, namePlaylist, null);
+        documento.setXmlVersion("1.0");
+
+        Element PlayList = documento.createElement(namePlaylist);
+
+        Document leerdocumento = builder.parse(new File("PlayList.xml"));
+
+        NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
+
+
+        for (int i = 0; i <= listaSongs.size()-1; i++) {
+            Node nodo = listaCanciones.item(i);
+
             System.out.println(nodo.getFirstChild().getTextContent());
 
-            if (nodo.getFirstChild().getTextContent().equals(comparador)){
+            if (nodo.getFirstChild().getTextContent().equals(comparador)) {
                 System.out.println("se elimino");
 
-            }else{
+            } else {
                 Element Song = documento.createElement("Song");
 
                 Element Titulo = documento.createElement("Titulo");
@@ -98,6 +164,7 @@ public class MetadataXML {
                 PlayList.appendChild(Song);
             }
         }
+
 
         documento.getDocumentElement().appendChild(PlayList);
 

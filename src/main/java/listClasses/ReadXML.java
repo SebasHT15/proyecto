@@ -15,11 +15,14 @@ import java.io.IOException;
 public class ReadXML {
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
+        leerXml("PlayList.xml");
+    }
+    public static void leerXml(String filepath) throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        Document documento = builder.parse(new File("PlayList.xml"));
+        Document documento = builder.parse(new File(filepath));
 
         NodeList listaCanciones = documento.getElementsByTagName("Song");
 
