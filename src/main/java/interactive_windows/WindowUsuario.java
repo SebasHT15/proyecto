@@ -66,8 +66,8 @@ public class WindowUsuario {
         stage.show();
     }
 
-    public void init_ventanaUsuario(List listausuario, Integer i, String text, String usupasswordText, String urlBibliotecas, Stage stage, WindowLogin ventanaIniController) {
-        lblName.setText(text);
+    public void init_ventanaUsuario(List listausuario, Integer i, String name, String usupasswordText, String urlBibliotecas, Stage stage, WindowLogin ventanaIniController) {
+        lblName.setText(name);
         lblPassword.setText(usupasswordText);
         this.controllerVentanaInicio = ventanaIniController;
         this.stage = stage;

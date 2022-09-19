@@ -2,7 +2,10 @@ package interactive_windows;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -10,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import listClasses.Reader;
+
+import java.io.IOException;
 
 
 //Añadir boton para crear bibliotecas
@@ -21,6 +26,8 @@ public class WindowBibliotecas {
     private Label[] superlabel;
     private Label[] sublabel;
     private Button[] button;
+
+    private String urlBibliotecas;
 
     @FXML
     private VBox label_pane;
@@ -38,6 +45,7 @@ public class WindowBibliotecas {
     public void init_ventanaBibliotecas(String urlBibliotecas, Stage stage, WindowUsuario ventanaIniController) {
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
+        this.urlBibliotecas=urlBibliotecas;
 
         Reader lector_playlist = new Reader();
         lector_playlist.crear_bibliotecas(urlBibliotecas);
@@ -64,7 +72,7 @@ public class WindowBibliotecas {
 
             button_pane.getChildren().add(button[i]);
 
-            button[i].setText("Boton "+i);
+            button[i].setText("Editar");
 
             int i_print_console = i;
             button[i].setOnAction(event_print_console -> handle_print_console(event_print_console, i_print_console));
@@ -73,4 +81,20 @@ public class WindowBibliotecas {
     @FXML
     private void handle_print_console(ActionEvent event, Integer value){
         System.out.println(value);}
+
+    @FXML
+    void showVentanaEditBibliotecas() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaEditBiblioteca.fxml"));
+        Parent root = loader.load();
+        WindowEditBiblioteca controller = loader.getController();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        controller.init_ventaEditBibliotecas(this.urlBibliotecas, stage, this);
+        stage.show();
+        this.stage.close();
+    }
+    public void show(){
+        stage.show();
+    }
 }

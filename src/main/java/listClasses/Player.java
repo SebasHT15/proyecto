@@ -1,10 +1,7 @@
 package listClasses;
-
-
 import javax.sound.sampled.*;
 
 public class Player {
-
     float previousVolume = 0;
     float currentVolume = 0;
     FloatControl fc;

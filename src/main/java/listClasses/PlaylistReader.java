@@ -8,7 +8,7 @@ public class PlaylistReader {
 
     private static BufferedReader bufferedReader;
 
-    public static void editRecord(String filepath, String editTerm, String newName, String newDate, String newNumber_songs){
+    public static void deletePlaylist(String filepath, String editTerm){
         String tempFile = "temp.csv" ;
         File oldFile = new File(filepath) ;
         File newFile = new File(tempFile) ;
@@ -16,6 +16,7 @@ public class PlaylistReader {
         String name = "";
         String date = "";
         String number_songs = "";
+        String url = "";
 
         try {
             FileWriter fw = new FileWriter(tempFile,true) ;
@@ -31,12 +32,13 @@ public class PlaylistReader {
                 name = partes[0];
                 date = partes[1];
                 number_songs = partes[2];
+                url = partes[3];
 
                 if (name.equals(editTerm)) {
-                    pw.println(newName + "," + newDate + "," + newNumber_songs);
+                    //pw.println(newName + "," + newDate + "," + newNumber_songs);
 
                 } else {
-                    pw.println(name + "," + date + "," + number_songs);
+                    pw.println(name + "," + date + "," + number_songs + "," + url);
                 }
 
             }
@@ -51,5 +53,58 @@ public class PlaylistReader {
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+    public static void addPlaylist(String filepath, String newName, String newDate, String newNumber_songs, String newUrl){
+        String tempFile = "biblio.csv" ;
+        File oldFile = new File(filepath) ;
+        File newFile = new File(tempFile) ;
+
+        String name = "";
+        String date = "";
+        String number_songs = "";
+        String url = "";
+
+
+        try {
+            FileWriter fw = new FileWriter(tempFile,true) ;
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            bufferedReader = new BufferedReader(new FileReader(filepath));
+
+
+            while ((linea = bufferedReader.readLine()) != null){
+                partes = linea.split(",");
+
+                name = partes[0];
+                date = partes[1];
+                number_songs = partes[2];
+                url = partes[3];
+
+                pw.println(name + "," + date + "," + number_songs + "," + url);
+            }
+            pw.println(newName + "," + newDate + "," + newNumber_songs + "," + newUrl);
+
+            pw.close();
+            bufferedReader.close();
+            bw.close();
+            fw.close();
+
+            RandomAccessFile raf=new RandomAccessFile(oldFile,"rw");
+            raf.close();
+
+            oldFile.delete();
+
+            if (oldFile.delete()) {System.out.println("Deleted the file: " + oldFile.getName());} else {System.out.println("Failed to delete the file.");}
+
+            oldFile.delete();
+
+            File last = new File (filepath) ;
+            newFile.renameTo (last) ;
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
     }
 }
