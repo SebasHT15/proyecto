@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import listClasses.Usuario;
 import org.xml.sax.SAXException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +32,7 @@ public class WindowUsuario {
     }
 
     @FXML
-    void showVentanaReproductor() throws IOException, ParserConfigurationException, SAXException {
+    void showVentanaReproductor() throws IOException, ParserConfigurationException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaReproductor.fxml"));
         Parent root = loader.load();
         WindowReproductor controller = loader.getController();

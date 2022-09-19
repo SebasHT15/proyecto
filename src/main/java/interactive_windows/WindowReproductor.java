@@ -16,6 +16,7 @@ public class WindowReproductor {
     private WindowUsuario controllerVentanaUsuario;
     private Stage stage;
     private Player reproductor;
+    private Boolean playing = false;
 
     private Clip clip;
 
@@ -27,18 +28,19 @@ public class WindowReproductor {
         stage.close();
     }
     @FXML
-    void play() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        System.out.println(listSongs.search2("Motorola"));
-
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav"));
-        this.clip = AudioSystem.getClip();
-        clip.open(audioStream);
-
-
-        reproductor.play_song(clip);
+    void play() {
+        if (playing == false){
+            System.out.println(listSongs.search2("Motorola"));
+            reproductor.play_song(clip);
+            playing = true;
+        }else {
+            reproductor.stop_song(clip);
+            System.out.println("Stop");
+            playing = false;
+        }
     }
 
-    public void init_ventaReproductor(Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException {
+    public void init_ventaReproductor(Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
@@ -46,6 +48,8 @@ public class WindowReproductor {
         ReadXML.returnLista();
         this.listSongs = ReadXML.returnLista();
         this.reproductor = new Player();
-
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav"));
+        this.clip = AudioSystem.getClip();
+        clip.open(audioStream);
     }
 }
