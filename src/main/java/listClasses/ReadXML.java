@@ -35,6 +35,7 @@ public class ReadXML {
                     }
                 }
             }
+            System.out.println("\n");
         }
     }
 }

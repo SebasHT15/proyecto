@@ -17,7 +17,7 @@ public class MainSecundario {
 
         Reader lector_csv = new Reader();
         //lector_csv.crear_canciones("C:\\Users\\Adrian\\Desktop\\canciones.csv");
-        lector_csv.crear_canciones("src\\main\\resources\\Canciones");
+        /*lector_csv.crear_canciones("src\\main\\resources\\Canciones");
 
 
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(lector_csv.lista_canciones.getCurrent().getData().getUrl()));
@@ -74,7 +74,8 @@ public class MainSecundario {
                     player.volumeMute(clip);
                     break;
 
-                default:
+                default:*/
+        //Eso no es del gran comentario
                         /*if (player.duration(clip)==player.framePosition(clip)){
                             clip.close();
                             //Para pasar poner next
@@ -84,8 +85,8 @@ public class MainSecundario {
                             player.reset_song(clip);
                             player.start_fc(clip);
                         }*/
-                    System.out.println("Not a valid response");
-            }
+                    /*System.out.println("Not a valid response");
+            }*/
 
             /*clip.close();
             //Para pasar poner next
@@ -95,7 +96,7 @@ public class MainSecundario {
             player.reset_song(clip);
             player.start_fc(clip);
             player.play_song(clip);*/
-        }
-        System.out.println("Byeeee!");
+        /*}
+        System.out.println("Byeeee!");*/
     }
 }

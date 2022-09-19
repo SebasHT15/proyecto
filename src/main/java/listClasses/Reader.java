@@ -14,7 +14,7 @@ public class Reader{
     public List<Usuario> lista_usuarios = new ArrayList(); //definir tamano
 
     //Idea para el lector extraída de https://www.youtube.com/watch?v=uwn-Zkttux4
-    public void crear_canciones(String nombreArchivo) {
+    /*public void crear_canciones(String nombreArchivo) {
         try {
             lector = new BufferedReader(new FileReader(nombreArchivo));
             while ((linea = lector.readLine()) != null) {
@@ -28,7 +28,7 @@ public class Reader{
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
+    }*/
 
     public void crear_usuario(String nombreArchivo){
         try {

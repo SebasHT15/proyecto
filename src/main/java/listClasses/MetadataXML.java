@@ -1,9 +1,13 @@
 package listClasses;
 
-import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.*;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Text;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,51 +17,92 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MetadataXML {
 
-    public static void main(String[] args) throws ParserConfigurationException, TransformerException {
+    public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+        List<Song> ListaSongs = new ArrayList();
+        Song song1 = new Song("KickButoswki", "pop", "Poo", "Kung fu shiaoming", "2000", "yes daddy","holis");
+        ListaSongs.add(song1);
+
+        Song song2 = new Song("Motorola", "rock", "randall", "Mesa de madera", "80", "Yes mommy", "hola");
+        ListaSongs.add(song2);
+
+        createXML("PlayList", ListaSongs, "");
+    }
+
+    public static void createXML(String namePlaylist, List<Song> listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         DOMImplementation implementation = builder.getDOMImplementation();
 
-        Document documento = implementation.createDocument(null, "PlayList", null);
+        Document documento = implementation.createDocument(null, namePlaylist, null);
         documento.setXmlVersion("1.0");
 
-        Element PlayList = documento.createElement("PlayList");
-        Element Song = documento.createElement("Song");
+        Element PlayList = documento.createElement(namePlaylist);
 
-        Element Genero = documento.createElement("Genero:");
-        Text textGenero = documento.createTextNode("Pop");
-        Genero.appendChild(textGenero);
-        Song.appendChild(Genero);
+        Document leerdocumento = builder.parse(new File("PlayList.xml"));
 
-        Element Artista = documento.createElement("Artista:");
-        Text textArtista = documento.createTextNode("Michael Jackson");
-        Artista.appendChild(textArtista);
-        Song.appendChild(Artista);
+        NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
+        Node nodo = listaCanciones.item(0);
 
-        Element Album = documento.createElement("Album:");
-        Text textAlbum = documento.createTextNode("Thriller");
-        Album.appendChild(textAlbum);
-        Song.appendChild(Album);
+        for (int i = 0; i <= listaSongs.size()-1; i++){
+            System.out.println(nodo);
+            System.out.println(nodo.getFirstChild().getTextContent());
 
-        Element Year = documento.createElement("Year:");
-        Text textYear = documento.createTextNode("1982");
-        Year.appendChild(textYear);
-        Song.appendChild(Year);
+            if (nodo.getFirstChild().getTextContent().equals(comparador)){
+                System.out.println("se elimino");
 
-        Element Letra = documento.createElement("Letra:");
-        Text textLetra = documento.createTextNode("ayuwoki");
-        Letra.appendChild(textLetra);
-        Song.appendChild(Letra);
+            }else{
+                Element Song = documento.createElement("Song");
 
-        PlayList.appendChild(Song);
+                Element Titulo = documento.createElement("Titulo");
+                Text textTitulo = documento.createTextNode(listaSongs.get(i).getTitule());
+                Titulo.appendChild(textTitulo);
+                Song.appendChild(Titulo);
+
+                Element Genero = documento.createElement("Genero");
+                Text textGenero = documento.createTextNode(listaSongs.get(i).getGenre());
+                Genero.appendChild(textGenero);
+                Song.appendChild(Genero);
+
+                Element Artista = documento.createElement("Artista");
+                Text textArtista = documento.createTextNode(listaSongs.get(i).getArtist());
+                Artista.appendChild(textArtista);
+                Song.appendChild(Artista);
+
+                Element Album = documento.createElement("Album");
+                Text textAlbum = documento.createTextNode(listaSongs.get(i).getAlbum());
+                Album.appendChild(textAlbum);
+                Song.appendChild(Album);
+
+                Element Year = documento.createElement("Year");
+                Text textYear = documento.createTextNode(listaSongs.get(i).getYear());
+                Year.appendChild(textYear);
+                Song.appendChild(Year);
+
+                Element Letra = documento.createElement("Letra");
+                Text textLetra = documento.createTextNode(listaSongs.get(i).getLyrics());
+                Letra.appendChild(textLetra);
+                Song.appendChild(Letra);
+
+                Element URL = documento.createElement("URL");
+                Text textURL = documento.createTextNode(listaSongs.get(i).getUrl());
+                URL.appendChild(textURL);
+                Song.appendChild(URL);
+
+                PlayList.appendChild(Song);
+            }
+        }
 
         documento.getDocumentElement().appendChild(PlayList);
 
         Source source = new DOMSource(documento);
-        Result result = new StreamResult(new File("PlayList.xml"));
+        Result result = new StreamResult(new File(namePlaylist + ".xml"));
 
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.transform(source, result);
