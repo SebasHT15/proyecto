@@ -4,8 +4,6 @@ public class Node {
     private Song data;
     private Node next;
 
-
-
     public Node(Song data) {
         this.next = null;
         this.data = data;
