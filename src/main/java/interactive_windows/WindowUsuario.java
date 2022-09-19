@@ -7,11 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import listClasses.Usuario;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
 
 public class WindowUsuario {
+    private String urlBibliotecas;
     private List<Usuario> listauser;
     private Integer i;
     private WindowLogin controllerVentanaInicio;
@@ -27,7 +30,7 @@ public class WindowUsuario {
     }
 
     @FXML
-    void showVentanaReproductor() throws IOException {
+    void showVentanaReproductor() throws IOException, ParserConfigurationException, SAXException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaReproductor.fxml"));
         Parent root = loader.load();
         WindowReproductor controller = loader.getController();
@@ -47,7 +50,7 @@ public class WindowUsuario {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        controller.init_ventanaBibliotecas(stage, this );
+        controller.init_ventanaBibliotecas(urlBibliotecas, stage, this );
         stage.show();
     }
 
@@ -63,13 +66,14 @@ public class WindowUsuario {
         stage.show();
     }
 
-    public void init_ventanaUsuario(List listausuario, Integer i, String text, String usupasswordText, Stage stage, WindowLogin ventanaIniController) {
+    public void init_ventanaUsuario(List listausuario, Integer i, String text, String usupasswordText, String urlBibliotecas, Stage stage, WindowLogin ventanaIniController) {
         lblName.setText(text);
         lblPassword.setText(usupasswordText);
         this.controllerVentanaInicio = ventanaIniController;
         this.stage = stage;
         this.listauser = listausuario;
         this.i = i;
+        this.urlBibliotecas = urlBibliotecas;
     }
 
     public void show(){

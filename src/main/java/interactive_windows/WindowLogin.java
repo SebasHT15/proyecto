@@ -24,12 +24,12 @@ public class WindowLogin {
     @FXML
     public void cheking() throws IOException {
         Reader lectorUsuario = new Reader();
-        lectorUsuario.crear_usuario("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\proyecto\\usuarios.csv");
+        lectorUsuario.crear_usuario("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto\\usuarios.csv");
         //Esto es mal, hacer mejor usuaro y meterlo en lista
 
         for(int i = 0; i <= lectorUsuario.lista_usuarios.size()-1; i++){
             if (txtName.getText().equals(lectorUsuario.lista_usuarios.get(i).getUser()) && usupassword.getText().equals(lectorUsuario.lista_usuarios.get(i).getPassword())){
-                showVentanaUsuario(lectorUsuario.lista_usuarios, i);
+                showVentanaUsuario(lectorUsuario.lista_usuarios, i, lectorUsuario.lista_usuarios.get(i).getUrlBibliotecas());
                 break;
 
             } else{
@@ -39,14 +39,14 @@ public class WindowLogin {
     }
 
     @FXML
-    void showVentanaUsuario(List listauser, Integer i) throws IOException {
+    void showVentanaUsuario(List listauser, Integer i, String urlBibliotecas) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaUsuario.fxml"));
         Parent root = loader.load();
         WindowUsuario controller = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        controller.init_ventanaUsuario(listauser, i, txtName.getText(), usupassword.getText(), stage, this);
+        controller.init_ventanaUsuario(listauser, i, txtName.getText(), usupassword.getText(), urlBibliotecas, stage, this);
         stage.show();
         popUp.setText("");
         this.stage1.close();

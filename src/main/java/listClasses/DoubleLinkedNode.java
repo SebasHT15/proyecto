@@ -1,7 +1,7 @@
 package listClasses;
 
 public class DoubleLinkedNode {
-    int data;
+    Song data;
     DoubleLinkedNode next;
     DoubleLinkedNode previous;
     /*public DoubleLinkedNode(int data){

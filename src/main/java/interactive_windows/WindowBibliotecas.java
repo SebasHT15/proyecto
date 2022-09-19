@@ -35,12 +35,12 @@ public class WindowBibliotecas {
         stage.close();
     }
 
-    public void init_ventanaBibliotecas(Stage stage, WindowUsuario ventanaIniController) {
+    public void init_ventanaBibliotecas(String urlBibliotecas, Stage stage, WindowUsuario ventanaIniController) {
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
 
         Reader lector_playlist = new Reader();
-        lector_playlist.crear_bibliotecas("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\proyecto\\bibliotecas.csv");
+        lector_playlist.crear_bibliotecas(urlBibliotecas);
         //this.number_playlist = 3;
 
         button_pane.setSpacing(15);

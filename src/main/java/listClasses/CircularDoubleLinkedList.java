@@ -9,7 +9,7 @@ public class CircularDoubleLinkedList {
         fist=null;
         last=null;
     }
-    public void insert(Integer data){
+    public void insert(Song data){
         DoubleLinkedNode newdoubleLinkedNode = new DoubleLinkedNode();
         newdoubleLinkedNode.data=data;
         if (fist==null){
@@ -25,7 +25,7 @@ public class CircularDoubleLinkedList {
             fist.previous=last;
         }
     }
-    public void delete(int x) {
+    public void delete(Song x) {
         DoubleLinkedNode current = new DoubleLinkedNode();
         DoubleLinkedNode previous_temp = new DoubleLinkedNode();
         current = fist;
@@ -50,7 +50,7 @@ public class CircularDoubleLinkedList {
             current = current.next;
         }while (current != fist);
     }
-    public void search(int x){
+    public void search(Song x){
         DoubleLinkedNode current = new DoubleLinkedNode();
         current = last;
         Boolean found = false;
@@ -78,5 +78,23 @@ public class CircularDoubleLinkedList {
         }else {
             System.out.println("vacia");
         }
+    }
+
+    public String search2(String x){
+        DoubleLinkedNode current = new DoubleLinkedNode();
+        current = last;
+        Boolean found = false;
+        do {
+            if (current.data.getTitule() == x){
+                found = true;
+            }
+            current=current.previous;
+        }while (current != last && found != true);
+        if (found == true){
+            System.out.println("encontrado");
+        }else {
+
+        }
+        return current.data.getTitule();
     }
 }

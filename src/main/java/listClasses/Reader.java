@@ -38,7 +38,7 @@ public class Reader{
             while ((linea = lector.readLine()) != null) {
                 partes = linea.split(",");
 
-                Usuario usuario = new Usuario(partes[0], partes[1], partes[2], partes[3], partes[4]);
+                Usuario usuario = new Usuario(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5]);
 
                 lista_usuarios.add(usuario);
             }

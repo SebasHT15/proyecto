@@ -13,9 +13,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReadXML {
-
+    private static CircularDoubleLinkedList listaSongs = new CircularDoubleLinkedList();
+    private static List<String> atributosSong = new ArrayList<>();
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         leerXml("PlayList.xml");
     }
@@ -36,11 +39,19 @@ public class ReadXML {
                 for (int j = 0; j < hijos.getLength(); j++){
                     Node hijo = hijos.item(j);
                     if (hijo.getNodeType() == Node.ELEMENT_NODE){
-                        System.out.println(hijo.getNodeName() + " " + hijo.getTextContent());
+                        //System.out.println(hijo.getNodeName() + " " + hijo.getTextContent());
+                        atributosSong.add(hijo.getTextContent());
                     }
                 }
             }
             System.out.println("\n");
+            Song cancion = new Song(atributosSong.get(0), atributosSong.get(1), atributosSong.get(2), atributosSong.get(3),
+            atributosSong.get(4), atributosSong.get(5), atributosSong.get(6));
+            listaSongs.insert(cancion);
         }
+    }
+
+    public static CircularDoubleLinkedList returnLista(){
+        return listaSongs;
     }
 }

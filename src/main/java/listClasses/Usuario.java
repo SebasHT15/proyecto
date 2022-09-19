@@ -11,12 +11,15 @@ public class Usuario {
 
     private String province;
 
-    public Usuario(String user, String password, String name, String email, String province){
+    private String urlBibliotecas;
+
+    public Usuario(String user, String password, String name, String email, String province, String urlBibliotecas){
         this.user = user;
         this.password = password;
         this.name = name;
         this.email = email;
         this.province = province;
+        this.urlBibliotecas = urlBibliotecas;
     }
 
     public String getUser(){
@@ -35,7 +38,7 @@ public class Usuario {
         return this.email;
     }
 
-    public String getProvince(){
-        return this.province;
-    }
+    public String getProvince(){return this.province;}
+
+    public String getUrlBibliotecas(){return urlBibliotecas;}
 }

@@ -1,7 +1,7 @@
 package listClasses;
 
 public class ListaRunTest {
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         CircularDoubleLinkedList list=new CircularDoubleLinkedList();
         list.insert(0);
         list.insert(2);
@@ -14,5 +14,5 @@ public class ListaRunTest {
 
         list.displayList();
 
-    }
+    }*/
 }
