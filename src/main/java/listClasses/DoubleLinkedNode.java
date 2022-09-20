@@ -14,4 +14,7 @@ public class DoubleLinkedNode {
         this.next=next;
         this.previous=previous;
     }*/
+    public Song getData() {
+        return data;
+    }
 }

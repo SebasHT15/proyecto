@@ -21,14 +21,14 @@ public class MetadataXML {
 
     public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
         List<Song> ListaSongs = new ArrayList();
-        Song song1 = new Song("KickButoswki", "pop", "Poo", "Kung fu shiaoming", "2000", "yes daddy","holis");
+        Song song1 = new Song("Mario", "Game", "Nintendo", "No tiene", "2000", "Desconocido","C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\mario.wav");
         ListaSongs.add(song1);
 
-        Song song2 = new Song("Motorola", "rock", "randall", "Mesa de madera", "80", "Yes mommy", "hola");
+        Song song2 = new Song("Zelda", "Game", "Nintendo", "No tiene", "2000", "Desconocido", "C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav");
         ListaSongs.add(song2);
         createXML("PlayList", ListaSongs);
 
-        //eliminar_elementoXML("PlayList", ListaSongs, "");
+        eliminar_elementoXML("PlayList", ListaSongs, "Motorola");
     }
 
     public static void createXML(String namePlaylist, List<Song> listaSongs) throws ParserConfigurationException, TransformerException, IOException, SAXException {

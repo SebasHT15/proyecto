@@ -3,43 +3,43 @@ package listClasses;
 
 
 public class CircularDoubleLinkedList {
-    private DoubleLinkedNode fist;
+    private DoubleLinkedNode first;
     private DoubleLinkedNode last;
     public CircularDoubleLinkedList(){
-        fist=null;
+        first =null;
         last=null;
     }
     public void insert(Song data){
         DoubleLinkedNode newdoubleLinkedNode = new DoubleLinkedNode();
         newdoubleLinkedNode.data=data;
-        if (fist==null){
-            fist=newdoubleLinkedNode;
+        if (first ==null){
+            first =newdoubleLinkedNode;
             last=newdoubleLinkedNode;
-            fist.next=fist;
+            first.next= first;
             last.previous=last;
         }else {
             last.next=newdoubleLinkedNode;
-            newdoubleLinkedNode.next=fist;
+            newdoubleLinkedNode.next= first;
             newdoubleLinkedNode.previous=last;
             last=newdoubleLinkedNode;
-            fist.previous=last;
+            first.previous=last;
         }
     }
     public void delete(Song x) {
         DoubleLinkedNode current = new DoubleLinkedNode();
         DoubleLinkedNode previous_temp = new DoubleLinkedNode();
-        current = fist;
+        current = first;
         previous_temp = last;
         do {
             if (current.data == x) {
-                if (current == fist){
-                    fist = fist.next;
-                    last.next = fist;
-                    fist.previous = last;
+                if (current == first){
+                    first = first.next;
+                    last.next = first;
+                    first.previous = last;
                 } else if (current == last) {
                     last = previous_temp;
-                    fist.previous = last;
-                    last.next = fist;
+                    first.previous = last;
+                    last.next = first;
                 }
                 else {
                     previous_temp.next = current.next;
@@ -48,7 +48,7 @@ public class CircularDoubleLinkedList {
             }
             previous_temp = current;
             current = current.next;
-        }while (current != fist);
+        }while (current != first);
     }
     public void search(Song x){
         DoubleLinkedNode current = new DoubleLinkedNode();
@@ -68,12 +68,12 @@ public class CircularDoubleLinkedList {
     }
     public void displayList(){
         DoubleLinkedNode current = new DoubleLinkedNode();
-        current = fist;
-        if (fist != null){
+        current = first;
+        if (first != null){
             do {
                 System.out.println(current.data);
                 current = current.next;
-            }while (current != fist);
+            }while (current != first);
 
         }else {
             System.out.println("vacia");
@@ -96,5 +96,11 @@ public class CircularDoubleLinkedList {
 
         }
         return current.data.getTitule();
+    }
+    public DoubleLinkedNode getFirst() {
+        return first;
+    }
+    public DoubleLinkedNode getLast() {
+        return last;
     }
 }

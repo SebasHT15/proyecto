@@ -25,10 +25,8 @@ public class WindowReproductor {
     private Boolean reset = false;
     private Clip clip;
     private CircularDoubleLinkedList listSongs;
-
     @FXML
     private Slider volumeSlider;
-
     @FXML
     void showVentanaUsuario() {
         controllerVentanaUsuario.show();
@@ -66,10 +64,13 @@ public class WindowReproductor {
         ReadXML.leerXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
         ReadXML.returnLista();
         this.listSongs = ReadXML.returnLista();
+        this.listSongs.getFirst().getData().getUrl();
 
 
         this.reproductor = new Player();
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav"));
+        //AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav"));
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(listSongs.getFirst().getData().getUrl()));
+
         this.clip = AudioSystem.getClip();
 
         clip.open(audioStream);

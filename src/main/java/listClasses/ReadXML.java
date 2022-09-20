@@ -37,7 +37,7 @@ public class ReadXML {
                 for (int j = 0; j < hijos.getLength(); j++){
                     Node hijo = hijos.item(j);
                     if (hijo.getNodeType() == Node.ELEMENT_NODE){
-                        //System.out.println(hijo.getNodeName() + " " + hijo.getTextContent());
+                        System.out.println(hijo.getNodeName() + " " + hijo.getTextContent());
                         atributosSong.add(hijo.getTextContent());
                     }
                 }
