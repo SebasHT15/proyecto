@@ -1,5 +1,7 @@
 package interactive_windows;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
@@ -13,6 +15,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.*;
+
 public class WindowReproductor {
     private WindowUsuario controllerVentanaUsuario;
     private Stage stage;
@@ -21,6 +25,7 @@ public class WindowReproductor {
     private Boolean reset = false;
     private Clip clip;
     private CircularDoubleLinkedList listSongs;
+
     @FXML
     private Slider volumeSlider;
 
@@ -28,11 +33,12 @@ public class WindowReproductor {
     void showVentanaUsuario() {
         controllerVentanaUsuario.show();
         stage.close();
+        clip.close();
     }
     @FXML
     void play() {
         if (playing == false){
-            System.out.println(listSongs.search2("Motorola"));
+            System.out.println(listSongs.search2("Playing"));
             reproductor.play_song(clip);
             playing = true;
         }else {
@@ -46,7 +52,6 @@ public class WindowReproductor {
         if (reset == false){
             System.out.println("hola");
             reproductor.reset_song(clip);
-            reproductor.volumeUpTest(clip);
         }
     }
 
@@ -58,12 +63,26 @@ public class WindowReproductor {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
-        ReadXML.leerXml("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\proyecto\\PlayList.xml");
+        ReadXML.leerXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
         ReadXML.returnLista();
         this.listSongs = ReadXML.returnLista();
+
+
         this.reproductor = new Player();
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\Canciones\\Canciones\\main.wav"));
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav"));
         this.clip = AudioSystem.getClip();
+
         clip.open(audioStream);
+
+        this.reproductor.start_fc(clip);
+
+        volumeSlider.setValue(reproductor.getFc().getValue());
+        volumeSlider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                reproductor.getFc().setValue((float) volumeSlider.getValue());
+            }
+        });
+
     }
 }

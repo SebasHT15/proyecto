@@ -25,8 +25,9 @@ public class Player {
     }
 
     public void volumeUpTest(Clip clip) {
-        fc.setValue(1.0f);
+
         System.out.println(fc);
+
         //fc.setValue(currentVolume);
     }
 
@@ -39,11 +40,14 @@ public class Player {
     }
 
     public void volumeDown(Clip clip) {
-        currentVolume -= 10.0f;
+        currentVolume -= 1.0f;
         if (currentVolume < -80.0f) {
             currentVolume = -80.0f;
         }
         fc.setValue(currentVolume);
+    }
+    public void setVolume(float flotante){
+        fc.setValue(flotante);
     }
 
     public void volumeMute(Clip clip) {
@@ -58,5 +62,8 @@ public class Player {
             fc.setValue(currentVolume);
             mute = false;
         }
+    }
+    public FloatControl getFc(){
+        return fc;
     }
 }

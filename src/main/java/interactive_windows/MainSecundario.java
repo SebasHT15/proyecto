@@ -15,12 +15,9 @@ public class MainSecundario {
         Scanner scanner = new Scanner(System.in);
         Player player = new Player();
 
-        Reader lector_csv = new Reader();
-        //lector_csv.crear_canciones("C:\\Users\\Adrian\\Desktop\\canciones.csv");
-        /*lector_csv.crear_canciones("src\\main\\resources\\Canciones");
 
 
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(lector_csv.lista_canciones.getCurrent().getData().getUrl()));
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav"));
 
 
 
@@ -50,7 +47,7 @@ public class MainSecundario {
                 case ("V"):
                     clip.close();
                     //Para pasar poner next
-                    audioStream = AudioSystem.getAudioInputStream(new File(lector_csv.lista_canciones.getCurrent().getNext().getData().getUrl()));
+                    audioStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\mario.wav"));
                     clip = AudioSystem.getClip();
                     clip.open(audioStream);
                     player.reset_song(clip);
@@ -74,7 +71,7 @@ public class MainSecundario {
                     player.volumeMute(clip);
                     break;
 
-                default:*/
+                default:
         //Eso no es del gran comentario
                         /*if (player.duration(clip)==player.framePosition(clip)){
                             clip.close();
@@ -85,8 +82,8 @@ public class MainSecundario {
                             player.reset_song(clip);
                             player.start_fc(clip);
                         }*/
-                    /*System.out.println("Not a valid response");
-            }*/
+                    System.out.println("Not a valid response");
+            }
 
             /*clip.close();
             //Para pasar poner next
@@ -96,7 +93,8 @@ public class MainSecundario {
             player.reset_song(clip);
             player.start_fc(clip);
             player.play_song(clip);*/
-        /*}
-        System.out.println("Byeeee!");*/
+
+        //System.out.println("Byeeee!");
+        }
     }
 }

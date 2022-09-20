@@ -48,7 +48,7 @@
             <Image url="@interactive_windows.images/potispo.png" />
          </image>
       </ImageView>
-      <Slider fx:id="volumeSlider" layoutX="233.0" layoutY="322.0" />
+      <Slider fx:id="volumeSlider" blockIncrement="1.0" layoutX="233.0" layoutY="322.0" max="6.0" min="-80.0" value="6.0" />
    </children>
    <effect>
       <ColorAdjust saturation="0.04" />
