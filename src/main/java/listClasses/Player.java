@@ -2,8 +2,8 @@ package listClasses;
 import javax.sound.sampled.*;
 
 public class Player {
-    float previousVolume = 0;
-    float currentVolume = 0;
+    public float previousVolume = 0;
+    public float currentVolume = 0;
     FloatControl fc;
     boolean mute = false;
 
@@ -24,8 +24,14 @@ public class Player {
         clip.stop();
     }
 
+    public void volumeUpTest(Clip clip) {
+        fc.setValue(1.0f);
+        System.out.println(fc);
+        //fc.setValue(currentVolume);
+    }
+
     public void volumeUp(Clip clip) {
-        currentVolume += 10.0f;
+        currentVolume += 1.0f;
         if (currentVolume > 6.0f) {
             currentVolume = 6.0f;
         }

@@ -31,7 +31,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="420.0" layoutY="263.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Reset" />
+      <Button layoutX="420.0" layoutY="263.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="91.0" text="Reset" />
       <Button fx:id="play122" alignment="CENTER" contentDisplay="BOTTOM" layoutX="196.0" layoutY="253.0" mnemonicParsing="false" onAction="#play" prefHeight="26.0" prefWidth="64.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
@@ -48,7 +48,7 @@
             <Image url="@interactive_windows.images/potispo.png" />
          </image>
       </ImageView>
-      <Slider layoutX="233.0" layoutY="322.0" />
+      <Slider fx:id="volumeSlider" layoutX="233.0" layoutY="322.0" />
    </children>
    <effect>
       <ColorAdjust saturation="0.04" />
