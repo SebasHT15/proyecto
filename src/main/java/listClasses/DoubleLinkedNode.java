@@ -17,4 +17,6 @@ public class DoubleLinkedNode {
     public Song getData() {
         return data;
     }
+    public DoubleLinkedNode getNext() {return next;}
+    public DoubleLinkedNode getPrevious() {return previous;}
 }

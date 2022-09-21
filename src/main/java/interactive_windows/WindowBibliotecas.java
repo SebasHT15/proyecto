@@ -42,7 +42,7 @@ public class WindowBibliotecas {
         stage.close();
     }
 
-    public void init_ventanaBibliotecas(String urlBibliotecas, Stage stage, WindowUsuario ventanaIniController) {
+    public void init_ventanaBibliotecas(String urlBibliotecas, Stage stage, WindowUsuario ventanaIniController) throws IOException {
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
         this.urlBibliotecas=urlBibliotecas;

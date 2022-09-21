@@ -3,6 +3,7 @@ package listClasses;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Reader{
     public List<Usuario> lista_usuarios = new ArrayList(); //definir tamano
     public List<Playlist> lista_playlist = new ArrayList<>();
 
-    public void crear_usuario(String nombreArchivo){
+    public void crear_usuario(String nombreArchivo) throws IOException {
         try {
             lector = new BufferedReader(new FileReader(nombreArchivo));
             while ((linea = lector.readLine()) != null) {
@@ -28,8 +29,9 @@ public class Reader{
         } catch (Exception e) {
             System.out.println(e);
         }
+        lector.close();
     }
-    public void crear_bibliotecas(String nombreArchivo){
+    public void crear_bibliotecas(String nombreArchivo) throws IOException {
         try {
             lector = new BufferedReader(new FileReader(nombreArchivo));
             while ((linea = lector.readLine()) != null) {
@@ -44,6 +46,7 @@ public class Reader{
         } catch (Exception e) {
             System.out.println(e);
         }
+        lector.close();
     }
     public int getNumber_playlist(){
         return this.number_playlist;

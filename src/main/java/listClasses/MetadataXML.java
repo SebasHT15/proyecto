@@ -20,7 +20,8 @@ import java.util.List;
 public class MetadataXML {
 
     public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
-        List<Song> ListaSongs = new ArrayList();
+        ReadXML.leerXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
+        /*List<Song> ListaSongs = new ArrayList();
         Song song1 = new Song("Mario", "Game", "Nintendo", "No tiene", "2000", "Desconocido","C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\mario.wav");
         ListaSongs.add(song1);
 
@@ -28,7 +29,7 @@ public class MetadataXML {
         ListaSongs.add(song2);
         createXML("PlayList", ListaSongs);
 
-        eliminar_elementoXML("PlayList", ListaSongs, "Motorola");
+        eliminar_elementoXML("PlayList", ListaSongs, "Motorola");*/
     }
 
     public static void createXML(String namePlaylist, List<Song> listaSongs) throws ParserConfigurationException, TransformerException, IOException, SAXException {
