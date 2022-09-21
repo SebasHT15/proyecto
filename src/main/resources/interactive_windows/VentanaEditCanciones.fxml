@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.WindowEditCanciones">
+   <children>
+      <VBox fx:id="songPane" layoutX="24.0" layoutY="69.0" prefHeight="260.0" prefWidth="205.0" />
+      <Label fx:id="playlistName" layoutX="30.0" layoutY="20.0" text="Playlist">
+         <font>
+            <Font name="Dubai Regular" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="24.0" layoutY="353.0" mnemonicParsing="false" onAction="#showVentanaBibliotecas" text="Back" />
+      <Button layoutX="250.0" layoutY="306.0" mnemonicParsing="false" text="Añadir" />
+      <Button layoutX="340.0" layoutY="306.0" mnemonicParsing="false" text="Eliminar" />
+      <TextField fx:id="titule" layoutX="250.0" layoutY="72.0" promptText="Titulo" />
+      <TextField fx:id="genre" layoutX="250.0" layoutY="112.0" promptText="Género" />
+      <TextField fx:id="artist" layoutX="250.0" layoutY="151.0" promptText="Artista" />
+      <TextField fx:id="album" layoutX="250.0" layoutY="188.0" promptText="Álbum" />
+      <TextField fx:id="lyrics" layoutX="250.0" layoutY="222.0" promptText="Letra" />
+      <TextField fx:id="url" layoutX="250.0" layoutY="258.0" promptText="Url" />
+   </children>
+   <effect>
+      <ColorAdjust saturation="0.04" />
+   </effect>
+</AnchorPane>

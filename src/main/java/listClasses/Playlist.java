@@ -38,5 +38,9 @@ public class Playlist {
     public void setNumber_songs(Integer number_songs) {
         this.number_songs = number_songs;
     }
+
+    public String songs_xml_url() {return songs_xml_url;}
+
+    public void setSongs_xml_url(String songs_xml_url) {this.songs_xml_url = songs_xml_url;}
 }
 

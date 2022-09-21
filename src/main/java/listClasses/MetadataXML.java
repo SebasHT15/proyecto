@@ -19,8 +19,8 @@ import java.util.List;
 
 public class MetadataXML {
 
-    public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
-        ReadXML.leerXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
+   // public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+        //ReadXML.leerXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
         /*List<Song> ListaSongs = new ArrayList();
         Song song1 = new Song("Mario", "Game", "Nintendo", "No tiene", "2000", "Desconocido","C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\mario.wav");
         ListaSongs.add(song1);
@@ -30,7 +30,7 @@ public class MetadataXML {
         createXML("PlayList", ListaSongs);
 
         eliminar_elementoXML("PlayList", ListaSongs, "Motorola");*/
-    }
+    //}
 
     public static void createXML(String namePlaylist, List<Song> listaSongs) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
@@ -95,6 +95,58 @@ public class MetadataXML {
 
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.transform(source, result);
+    }
+    public static String createNewXML(String namePlaylist) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        DOMImplementation implementation = builder.getDOMImplementation();
+
+        Document documento = implementation.createDocument(null, namePlaylist, null);
+        documento.setXmlVersion("1.0");
+
+        Element PlayList = documento.createElement(namePlaylist);
+
+        Document leerdocumento = builder.parse(new File("PlayList.xml"));
+
+        NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
+
+
+        Element Song = documento.createElement("Song");
+
+        Element Titulo = documento.createElement("Titulo");
+        Song.appendChild(Titulo);
+
+        Element Genero = documento.createElement("Genero");
+        Song.appendChild(Genero);
+
+        Element Artista = documento.createElement("Artista");
+        Song.appendChild(Artista);
+
+        Element Album = documento.createElement("Album");
+        Song.appendChild(Album);
+
+        Element Year = documento.createElement("Year");
+        Song.appendChild(Year);
+
+        Element Letra = documento.createElement("Letra");
+        Song.appendChild(Letra);
+
+        Element URL = documento.createElement("URL");
+
+        Song.appendChild(URL);
+
+        PlayList.appendChild(Song);
+
+
+        documento.getDocumentElement().appendChild(PlayList);
+
+        Source source = new DOMSource(documento);
+        Result result = new StreamResult(new File(namePlaylist + ".xml"));
+
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(source, result);
+        return namePlaylist + ".xml";
     }
     public static void eliminar_elementoXML(String namePlaylist, List<Song> listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 

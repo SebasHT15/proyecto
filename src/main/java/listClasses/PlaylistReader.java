@@ -90,12 +90,9 @@ public class PlaylistReader {
             bw.close();
             fw.close();
 
-            RandomAccessFile raf=new RandomAccessFile(oldFile,"rw");
-            raf.close();
-
             oldFile.delete();
 
-            if (oldFile.delete()) {System.out.println("Deleted the file: " + oldFile.getName());} else {System.out.println("Failed to delete the file.");}
+
 
             oldFile.delete();
 

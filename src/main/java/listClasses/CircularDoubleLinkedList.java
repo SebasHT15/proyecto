@@ -5,6 +5,7 @@ package listClasses;
 public class CircularDoubleLinkedList {
     private DoubleLinkedNode first;
     private DoubleLinkedNode last;
+    private Integer size = 0;
     public CircularDoubleLinkedList(){
         first =null;
         last=null;
@@ -24,6 +25,7 @@ public class CircularDoubleLinkedList {
             last=newdoubleLinkedNode;
             first.previous=last;
         }
+        this.size=this.size+1;//Buscar como tener el sisze de una doblememnte enlazada
     }
     public void delete(Song x) {
         DoubleLinkedNode current = new DoubleLinkedNode();
@@ -103,4 +105,5 @@ public class CircularDoubleLinkedList {
     public DoubleLinkedNode getLast() {
         return last;
     }
+    public Integer getSize(){return this.size;}
 }

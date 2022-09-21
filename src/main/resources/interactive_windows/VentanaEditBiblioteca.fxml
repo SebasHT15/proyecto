@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.WindowEditBiblioteca">
@@ -10,8 +11,11 @@
       <Button layoutX="42.0" layoutY="179.0" mnemonicParsing="false" onAction="#showVentanaBibliotecas" text="Back" />
       <Label layoutX="41.0" layoutY="38.0" prefHeight="17.0" prefWidth="71.0" text="Nombre:" />
       <TextField fx:id="NamePlaylist" layoutX="40.0" layoutY="75.0" prefHeight="25.0" prefWidth="195.0" />
-      <Button layoutX="63.0" layoutY="142.0" mnemonicParsing="false" onAction="#addPlaylist" text="Añadir" />
-      <Button layoutX="160.0" layoutY="142.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Eliminar" />
+      <Button layoutX="63.0" layoutY="130.0" mnemonicParsing="false" onAction="#addPlaylist" text="Añadir" />
+      <Button layoutX="161.0" layoutY="130.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Eliminar" />
       <Label fx:id="Advertencia" layoutX="81.0" layoutY="107.0" />
    </children>
+   <effect>
+      <ColorAdjust saturation="0.04" />
+   </effect>
 </AnchorPane>

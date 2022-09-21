@@ -45,7 +45,7 @@ public class WindowUsuario {
     }
 
     @FXML
-    void showVentanaBibliotecas() throws IOException {
+    void showVentanaBibliotecas() throws IOException, ParserConfigurationException, SAXException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaBibliotecas.fxml"));
         Parent root = loader.load();
         WindowBibliotecas controller = loader.getController();

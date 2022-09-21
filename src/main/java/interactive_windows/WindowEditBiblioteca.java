@@ -1,12 +1,18 @@
 package interactive_windows;
 
+import java.time.LocalDateTime;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import listClasses.MetadataXML;
 import listClasses.PlaylistReader;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.util.Date;
 
 public class WindowEditBiblioteca {
     private WindowBibliotecas controllerVentanaBibliotecas;
@@ -23,12 +29,13 @@ public class WindowEditBiblioteca {
         stage.close();
     }
     @FXML
-    void addPlaylist(){
-        if (NamePlaylist.getText().equals("")){
+    void addPlaylist() throws ParserConfigurationException, IOException, TransformerException, SAXException {
+        if (NamePlaylist.getText().equals("") ){
             Advertencia.setText("Inserte algun nombre");
         }else{
             PlaylistReader playlistReader = new PlaylistReader();
-            playlistReader.addPlaylist(this.urlBibliotecas, NamePlaylist.getText(), "2022", String.valueOf(0), "url");
+            Date date = new Date();
+            playlistReader.addPlaylist(this.urlBibliotecas, NamePlaylist.getText(), String.valueOf(date), String.valueOf(0), MetadataXML.createNewXML(NamePlaylist.getText())); //El url seria el xml para cada playlist
             Advertencia.setText("Añadido con exito");
         }
             }
@@ -43,7 +50,7 @@ public class WindowEditBiblioteca {
         }
     }
 
-    public void init_ventaEditBibliotecas(String urlBibliotecas, Stage stage, WindowBibliotecas ventanaIniController) throws IOException{
+    public void init_ventaEditBibliotecas(String urlBibliotecas, Stage stage, WindowBibliotecas ventanaIniController) {
         this.controllerVentanaBibliotecas = ventanaIniController;
         this.stage = stage;
         this.urlBibliotecas = urlBibliotecas;
