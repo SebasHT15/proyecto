@@ -1,5 +1,6 @@
 package interactive_windows;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,7 +36,7 @@ public class WindowEditBiblioteca {
         }else{
             PlaylistReader playlistReader = new PlaylistReader();
             Date date = new Date();
-            playlistReader.addPlaylist(this.urlBibliotecas, NamePlaylist.getText(), String.valueOf(date), String.valueOf(0), MetadataXML.createNewXML(NamePlaylist.getText())); //El url seria el xml para cada playlist
+            playlistReader.addPlaylist(this.urlBibliotecas, NamePlaylist.getText(), String.valueOf(date), String.valueOf(0), MetadataXML.createNewXML(NamePlaylist.getText()));
             Advertencia.setText("Añadido con exito");
         }
             }
@@ -47,6 +48,9 @@ public class WindowEditBiblioteca {
             PlaylistReader playlistReader = new PlaylistReader();
             playlistReader.deletePlaylist(this.urlBibliotecas, NamePlaylist.getText());
             Advertencia.setText("Eliminado con exito");
+            File a_eliminar = new File(NamePlaylist.getText()+".xml");
+            a_eliminar.delete();
+
         }
     }
 

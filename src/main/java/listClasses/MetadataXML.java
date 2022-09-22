@@ -18,85 +18,75 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetadataXML {
+   public static void RecargarXML(String namePlaylist, CircularDoubleLinkedList listaSongs) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
-   // public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
-        //ReadXML.leerXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
-        /*List<Song> ListaSongs = new ArrayList();
-        Song song1 = new Song("Mario", "Game", "Nintendo", "No tiene", "2000", "Desconocido","C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\mario.wav");
-        ListaSongs.add(song1);
+       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+       DocumentBuilder builder = factory.newDocumentBuilder();
+       DOMImplementation implementation = builder.getDOMImplementation();
 
-        Song song2 = new Song("Zelda", "Game", "Nintendo", "No tiene", "2000", "Desconocido", "C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav");
-        ListaSongs.add(song2);
-        createXML("PlayList", ListaSongs);
+       Document documento = implementation.createDocument(null, namePlaylist, null);
+       documento.setXmlVersion("1.0");
 
-        eliminar_elementoXML("PlayList", ListaSongs, "Motorola");*/
-    //}
+       Element PlayList = documento.createElement(namePlaylist);
 
-    public static void createXML(String namePlaylist, List<Song> listaSongs) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+       Document leerdocumento = builder.parse(new File("XmlBase.xml"));
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        DOMImplementation implementation = builder.getDOMImplementation();
+       NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
 
-        Document documento = implementation.createDocument(null, namePlaylist, null);
-        documento.setXmlVersion("1.0");
+       DoubleLinkedNode current = listaSongs.getFirst();
 
-        Element PlayList = documento.createElement(namePlaylist);
+       for (int i = 0; i <= listaSongs.getSize()-1; i++){
+           Element Song = documento.createElement("Song");
 
-        Document leerdocumento = builder.parse(new File("PlayList.xml"));
+           Element Titulo = documento.createElement("Titulo");
+           Text textTitulo = documento.createTextNode(current.getData().getTitule());
+           Titulo.appendChild(textTitulo);
+           Song.appendChild(Titulo);
 
-        NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
+           Element Genero = documento.createElement("Genero");
+           Text textGenero = documento.createTextNode(current.getData().getGenre());
+           Genero.appendChild(textGenero);
+           Song.appendChild(Genero);
 
-        for (int i = 0; i <= listaSongs.size()-1; i++){
-        Element Song = documento.createElement("Song");
+           Element Artista = documento.createElement("Artista");
+           Text textArtista = documento.createTextNode(current.getData().getArtist());
+           Artista.appendChild(textArtista);
+           Song.appendChild(Artista);
 
-        Element Titulo = documento.createElement("Titulo");
-        Text textTitulo = documento.createTextNode(listaSongs.get(i).getTitule());
-        Titulo.appendChild(textTitulo);
-        Song.appendChild(Titulo);
+           Element Album = documento.createElement("Album");
+           Text textAlbum = documento.createTextNode(current.getData().getAlbum());
+           Album.appendChild(textAlbum);
+           Song.appendChild(Album);
 
-        Element Genero = documento.createElement("Genero");
-        Text textGenero = documento.createTextNode(listaSongs.get(i).getGenre());
-        Genero.appendChild(textGenero);
-        Song.appendChild(Genero);
+           Element Year = documento.createElement("Year");
+           Text textYear = documento.createTextNode(current.getData().getYear());
+           Year.appendChild(textYear);
+           Song.appendChild(Year);
 
-        Element Artista = documento.createElement("Artista");
-        Text textArtista = documento.createTextNode(listaSongs.get(i).getArtist());
-        Artista.appendChild(textArtista);
-        Song.appendChild(Artista);
+           Element Letra = documento.createElement("Letra");
+           Text textLetra = documento.createTextNode(current.getData().getLyrics());
+           Letra.appendChild(textLetra);
+           Song.appendChild(Letra);
 
-        Element Album = documento.createElement("Album");
-        Text textAlbum = documento.createTextNode(listaSongs.get(i).getAlbum());
-        Album.appendChild(textAlbum);
-        Song.appendChild(Album);
+           Element URL = documento.createElement("URL");
+           Text textURL = documento.createTextNode(current.getData().getUrl());
+           URL.appendChild(textURL);
+           Song.appendChild(URL);
 
-        Element Year = documento.createElement("Year");
-        Text textYear = documento.createTextNode(listaSongs.get(i).getYear());
-        Year.appendChild(textYear);
-        Song.appendChild(Year);
+           PlayList.appendChild(Song);
+           current=current.getNext();
+       }
 
-        Element Letra = documento.createElement("Letra");
-        Text textLetra = documento.createTextNode(listaSongs.get(i).getLyrics());
-        Letra.appendChild(textLetra);
-        Song.appendChild(Letra);
+       documento.getDocumentElement().appendChild(PlayList);
 
-        Element URL = documento.createElement("URL");
-        Text textURL = documento.createTextNode(listaSongs.get(i).getUrl());
-        URL.appendChild(textURL);
-        Song.appendChild(URL);
+       Source source = new DOMSource(documento);
+       Result result = new StreamResult(new File(namePlaylist + ".xml"));
 
-        PlayList.appendChild(Song);
-        }
+       Transformer transformer = TransformerFactory.newInstance().newTransformer();
+       transformer.transform(source, result);
+   }
 
-        documento.getDocumentElement().appendChild(PlayList);
-
-        Source source = new DOMSource(documento);
-        Result result = new StreamResult(new File(namePlaylist + ".xml"));
-
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.transform(source, result);
-    }
-    public static String createNewXML(String namePlaylist) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+    public static void eliminar_elementoXML(String namePlaylist, CircularDoubleLinkedList listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -107,64 +97,13 @@ public class MetadataXML {
 
         Element PlayList = documento.createElement(namePlaylist);
 
-        Document leerdocumento = builder.parse(new File("PlayList.xml"));
+        Document leerdocumento = builder.parse(new File("XmlBase.xml"));
 
         NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
 
+        DoubleLinkedNode current = listaSongs.getFirst();
 
-        Element Song = documento.createElement("Song");
-
-        Element Titulo = documento.createElement("Titulo");
-        Song.appendChild(Titulo);
-
-        Element Genero = documento.createElement("Genero");
-        Song.appendChild(Genero);
-
-        Element Artista = documento.createElement("Artista");
-        Song.appendChild(Artista);
-
-        Element Album = documento.createElement("Album");
-        Song.appendChild(Album);
-
-        Element Year = documento.createElement("Year");
-        Song.appendChild(Year);
-
-        Element Letra = documento.createElement("Letra");
-        Song.appendChild(Letra);
-
-        Element URL = documento.createElement("URL");
-
-        Song.appendChild(URL);
-
-        PlayList.appendChild(Song);
-
-
-        documento.getDocumentElement().appendChild(PlayList);
-
-        Source source = new DOMSource(documento);
-        Result result = new StreamResult(new File(namePlaylist + ".xml"));
-
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.transform(source, result);
-        return namePlaylist + ".xml";
-    }
-    public static void eliminar_elementoXML(String namePlaylist, List<Song> listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
-
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        DOMImplementation implementation = builder.getDOMImplementation();
-
-        Document documento = implementation.createDocument(null, namePlaylist, null);
-        documento.setXmlVersion("1.0");
-
-        Element PlayList = documento.createElement(namePlaylist);
-
-        Document leerdocumento = builder.parse(new File("PlayList.xml"));
-
-        NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
-
-
-        for (int i = 0; i <= listaSongs.size()-1; i++) {
+        for (int i = 0; i <= listaSongs.getSize()-1; i++) {
             Node nodo = listaCanciones.item(i);
 
             System.out.println(nodo.getFirstChild().getTextContent());
@@ -176,41 +115,43 @@ public class MetadataXML {
                 Element Song = documento.createElement("Song");
 
                 Element Titulo = documento.createElement("Titulo");
-                Text textTitulo = documento.createTextNode(listaSongs.get(i).getTitule());
+                Text textTitulo = documento.createTextNode(current.getData().getTitule());
                 Titulo.appendChild(textTitulo);
                 Song.appendChild(Titulo);
 
                 Element Genero = documento.createElement("Genero");
-                Text textGenero = documento.createTextNode(listaSongs.get(i).getGenre());
+                Text textGenero = documento.createTextNode(current.getData().getGenre());
                 Genero.appendChild(textGenero);
                 Song.appendChild(Genero);
 
                 Element Artista = documento.createElement("Artista");
-                Text textArtista = documento.createTextNode(listaSongs.get(i).getArtist());
+                Text textArtista = documento.createTextNode(current.getData().getArtist());
                 Artista.appendChild(textArtista);
                 Song.appendChild(Artista);
 
                 Element Album = documento.createElement("Album");
-                Text textAlbum = documento.createTextNode(listaSongs.get(i).getAlbum());
+                Text textAlbum = documento.createTextNode(current.getData().getAlbum());
                 Album.appendChild(textAlbum);
                 Song.appendChild(Album);
 
                 Element Year = documento.createElement("Year");
-                Text textYear = documento.createTextNode(listaSongs.get(i).getYear());
+                Text textYear = documento.createTextNode(current.getData().getYear());
                 Year.appendChild(textYear);
                 Song.appendChild(Year);
 
                 Element Letra = documento.createElement("Letra");
-                Text textLetra = documento.createTextNode(listaSongs.get(i).getLyrics());
+                Text textLetra = documento.createTextNode(current.getData().getLyrics());
                 Letra.appendChild(textLetra);
                 Song.appendChild(Letra);
 
                 Element URL = documento.createElement("URL");
-                Text textURL = documento.createTextNode(listaSongs.get(i).getUrl());
+                Text textURL = documento.createTextNode(current.getData().getUrl());
                 URL.appendChild(textURL);
                 Song.appendChild(URL);
 
                 PlayList.appendChild(Song);
+
+                current = current.getNext();
             }
         }
 
@@ -221,5 +162,58 @@ public class MetadataXML {
 
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.transform(source, result);
+    }
+
+    public static String createNewXML(String namePlaylist) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        DOMImplementation implementation = builder.getDOMImplementation();
+
+        Document documento = implementation.createDocument(null, namePlaylist, null);
+        documento.setXmlVersion("1.0");
+
+        Element PlayList = documento.createElement(namePlaylist);
+
+        Document leerdocumento = builder.parse(new File("XmlBase.xml"));
+
+        NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
+
+        Element Song = documento.createElement("Song");
+
+        Element Titulo = documento.createElement("Titulo");
+        Song.appendChild(Titulo);
+
+        Element Genero = documento.createElement("Genero");
+        Song.appendChild(Genero);
+
+        Element Artista = documento.createElement("Artista");
+        Song.appendChild(Artista);
+
+        Element Album = documento.createElement("Album");
+        Song.appendChild(Album);
+
+        Element Year = documento.createElement("Year");
+        Song.appendChild(Year);
+
+        Element Letra = documento.createElement("Letra");
+        Song.appendChild(Letra);
+
+        Element URL = documento.createElement("URL");
+        Song.appendChild(URL);
+
+        PlayList.appendChild(Song);
+
+
+
+
+        documento.getDocumentElement().appendChild(PlayList);
+
+        Source source = new DOMSource(documento);
+        Result result = new StreamResult(new File(namePlaylist + ".xml"));
+
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(source, result);
+        return namePlaylist + ".xml";
     }
 }

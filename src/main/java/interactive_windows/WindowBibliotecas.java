@@ -3,7 +3,6 @@ package interactive_windows;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,8 +11,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import listClasses.CircularDoubleLinkedList;
-import listClasses.ReadXML;
 import listClasses.Reader;
 import org.xml.sax.SAXException;
 
@@ -49,7 +46,7 @@ public class WindowBibliotecas {
 
     }
     @FXML
-    private void handle_print_console(ActionEvent event, String BibliotecasUrl) throws IOException, ParserConfigurationException, SAXException {//Cambiar nomnbre
+    private void handle_print_console(ActionEvent event, String BibliotecasUrl, String bibliotecaName) throws IOException, ParserConfigurationException, SAXException {//Cambiar nomnbre
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaEditCanciones.fxml"));
         Parent root = loader.load();
@@ -58,7 +55,7 @@ public class WindowBibliotecas {
         Stage stage = new Stage();
         stage.setScene(scene);
 
-        controller.init_ventaEditCanciones(BibliotecasUrl,stage, this);
+        controller.init_ventaEditCanciones(BibliotecasUrl,bibliotecaName,stage, this);
 
         stage.show();
         this.stage.close();
@@ -76,14 +73,14 @@ public class WindowBibliotecas {
         this.stage.close();
     }
     @FXML
-    void recargar() throws IOException, ParserConfigurationException, SAXException {
+    void recargar() throws IOException {
         label_pane.getChildren().clear();
         button_pane.getChildren().clear();
 
         Reader lector_playlist = new Reader();
         lector_playlist.crear_bibliotecas(urlBibliotecas);
 
-        button_pane.setSpacing(15);
+        button_pane.setSpacing(30);
         Label[] superlabel = new Label[lector_playlist.getNumber_playlist()];
         Label[] sublabel = new Label[lector_playlist.getNumber_playlist()];
         Button[] button = new Button[lector_playlist.getNumber_playlist()];
@@ -107,10 +104,11 @@ public class WindowBibliotecas {
             button[i].setText("Songs");
 
             String BibliotecasUrl = lector_playlist.lista_playlist.get(i).songs_xml_url();
+            String BibliotecaName = lector_playlist.lista_playlist.get(i).name_playlist();
 
             button[i].setOnAction(event_print_console -> {
                 try {
-                    handle_print_console(event_print_console, BibliotecasUrl);//Aqui se anade lo que le quiero pasar
+                    handle_print_console(event_print_console, BibliotecasUrl, BibliotecaName);//Aqui se anade lo que le quiero pasar
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } catch (ParserConfigurationException e) {

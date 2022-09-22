@@ -90,18 +90,11 @@ public class WindowReproductor {
         this.clip = AudioSystem.getClip();
         clip.open(audioStream);
     }
-    public void prueba(){
-        while (clip.getFramePosition()>clip.getFrameLength()){
-
-        }
-        System.out.println("funciona");
-    }
-
     public void init_ventaReproductor(Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
-        ReadXML.leerXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
+        ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
         ReadXML.returnLista();
         this.listSongs = ReadXML.returnLista();
         this.listSongs.getFirst().getData().getUrl();
@@ -127,6 +120,18 @@ public class WindowReproductor {
                 reproductor.getFc().setValue((float) volumeSlider.getValue());
             }
         });
-
+        //this.comprobador_duracion(clip.getFrameLength());
+    }
+    private void comprobador_duracion(int segundos){
+        /*Thread.activeCount();
+        while (playing==false){
+            Thread.onSpinWait();
+        }*/
+        try {
+            Thread.sleep(segundos);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("Termine el hilo");
     }
 }

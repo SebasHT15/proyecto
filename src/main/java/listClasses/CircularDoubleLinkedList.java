@@ -10,6 +10,12 @@ public class CircularDoubleLinkedList {
         first =null;
         last=null;
     }
+
+    public void clear(){
+        first = null;
+        last = null;
+        size = 0;
+    }
     public void insert(Song data){
         DoubleLinkedNode newdoubleLinkedNode = new DoubleLinkedNode();
         newdoubleLinkedNode.data=data;
@@ -82,22 +88,31 @@ public class CircularDoubleLinkedList {
         }
     }
 
-    public String search2(String x){
+    public void delete2(String x) {
         DoubleLinkedNode current = new DoubleLinkedNode();
-        current = last;
-        Boolean found = false;
+        DoubleLinkedNode previous_temp = new DoubleLinkedNode();
+        current = first;
+        previous_temp = last;
         do {
-            if (current.data.getTitule() == x){
-                found = true;
+            if (current.data.getTitule() == x) {
+                if (current == first){
+                    first = first.next;
+                    last.next = first;
+                    first.previous = last;
+                } else if (current == last) {
+                    last = previous_temp;
+                    first.previous = last;
+                    last.next = first;
+                }
+                else {
+                    previous_temp.next = current.next;
+                    current.next.previous = previous_temp;
+                }
             }
-            current=current.previous;
-        }while (current != last && found != true);
-        if (found == true){
-            System.out.println("encontrado");
-        }else {
-
-        }
-        return current.data.getTitule();
+            previous_temp = current;
+            current = current.next;
+        }while (current != first);
+        size--;
     }
     public DoubleLinkedNode getFirst() {
         return first;
