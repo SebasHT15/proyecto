@@ -4,8 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import listClasses.Reader;
 import listClasses.Usuario;
 import org.xml.sax.SAXException;
 
@@ -23,13 +26,15 @@ import java.util.List;
 public class WindowUsuario {
     private String urlBibliotecas;
     private List<Usuario> listauser;
-    private Integer i;
+    private Integer numero_usuario;
     private WindowLogin controllerVentanaInicio;
     private Stage stage;
     @FXML
     private Label lblName;
     @FXML
     private Label lblPassword;
+    @FXML
+    private ChoiceBox<String> playlist_choice_box;
 
     /**
      * Cierra la ventana Usuario y abre la ventana Login.
@@ -51,15 +56,20 @@ public class WindowUsuario {
      */
     @FXML
     void showVentanaReproductor() throws IOException, ParserConfigurationException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaReproductor.fxml"));
-        Parent root = loader.load();
-        WindowReproductor controller = loader.getController();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        controller.init_ventaReproductor(stage, this);
-        stage.show();
-        this.stage.close();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaReproductor.fxml"));
+            Parent root = loader.load();
+            WindowReproductor controller = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            controller.init_ventaReproductor(playlist_choice_box.getValue(),stage, this);
+            stage.show();
+            this.stage.close();
+        } catch (Exception e){
+            //System.out.println(e);
+        }
+
     }
 
     /**
@@ -92,28 +102,35 @@ public class WindowUsuario {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        controller.init_ventanaInfo(stage, listauser.get(i).getUser(), listauser.get(i).getName(), listauser.get(i).getEmail(), listauser.get(i).getProvince(), this);
+        controller.init_ventanaInfo(stage, listauser.get(numero_usuario).getUser(), listauser.get(numero_usuario).getName(), listauser.get(numero_usuario).getEmail(), listauser.get(numero_usuario).getProvince(), this);
         stage.show();
     }
 
     /**
      * Inicializa la ventana Usuario, mostrandola en pantalla y guarda el acceso a la venta Login.
      * @param listausuario Lista que contiene a los objetos Usuarios existentes.
-     * @param i Integer que representa el indice de la lista en el que se encuentra el usuario con el que se hizo el login.
+     * @param numero_usuario Integer que representa el indice de la lista en el que se encuentra el usuario con el que se hizo el login.
      * @param name String que es el nombre del usuario con el que se hizo el login.
      * @param usupasswordText String que es la contraseña del usuario con el que se hizo el login.
      * @param urlBibliotecas String que es la ruta que contiene las bibliotecas del usuario con el que se hizo el login.
      * @param stage Ventana Login.
      * @param ventanaIniController Controlador ventana Login.
      */
-    public void init_ventanaUsuario(List listausuario, Integer i, String name, String usupasswordText, String urlBibliotecas, Stage stage, WindowLogin ventanaIniController) {
+    public void init_ventanaUsuario(List listausuario, Integer numero_usuario, String name, String usupasswordText, String urlBibliotecas, Stage stage, WindowLogin ventanaIniController) throws IOException {
         lblName.setText(name);
-        lblPassword.setText(usupasswordText);
+        //lblPassword.setText(usupasswordText);
         this.controllerVentanaInicio = ventanaIniController;
         this.stage = stage;
         this.listauser = listausuario;
-        this.i = i;
+        this.numero_usuario = numero_usuario;
         this.urlBibliotecas = urlBibliotecas;
+
+        Reader lector_playlist = new Reader();
+        lector_playlist.crear_bibliotecas(listauser.get(numero_usuario).getUrlBibliotecas());
+
+        for (int i = 0; i<lector_playlist.lista_playlist.size(); i++){
+            playlist_choice_box.getItems().add(lector_playlist.lista_playlist.get(i).name_playlist());
+        }
     }
 
     /**

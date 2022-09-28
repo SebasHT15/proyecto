@@ -12,7 +12,7 @@ public class Reader{
     private BufferedReader lector;
     private String linea;
     private String partes[] = null;
-    public List<Usuario> lista_usuarios = new ArrayList(); //definir tamano
+    public List<Usuario> lista_usuarios = new ArrayList();
     public List<Playlist> lista_playlist = new ArrayList<>();
 
     public void crear_usuario(String nombreArchivo) throws IOException {

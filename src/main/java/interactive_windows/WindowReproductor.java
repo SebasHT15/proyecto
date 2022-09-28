@@ -5,6 +5,7 @@ import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import listClasses.CircularDoubleLinkedList;
 import listClasses.DoubleLinkedNode;
@@ -133,12 +134,14 @@ public class WindowReproductor {
      * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      * @throws LineUnavailableException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      */
-    public void init_ventaReproductor(Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
+    public void init_ventaReproductor(String urlXML,Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
         //Cambiar esto a una variable para que dependa de cada usuario
-        ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\TestPepe.xml");
+        //ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\TestPepe.xml");
+        ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\"+urlXML+".xml");
+        //
         ReadXML.returnLista();
         this.listSongs = ReadXML.returnLista();
         this.listSongs.getFirst().getData().getUrl();

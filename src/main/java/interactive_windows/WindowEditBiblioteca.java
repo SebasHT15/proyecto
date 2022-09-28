@@ -36,7 +36,6 @@ public class WindowEditBiblioteca {
         }else{
             PlaylistReader playlistReader = new PlaylistReader();
             Date date = new Date();
-            System.out.println("TEst");
             playlistReader.addPlaylist(this.urlBibliotecas, NamePlaylist.getText(), String.valueOf(date), String.valueOf(0), MetadataXML.createNewXML(NamePlaylist.getText()));
             Advertencia.setText("Añadido con exito");
         }

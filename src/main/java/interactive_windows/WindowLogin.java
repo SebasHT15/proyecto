@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import listClasses.Reader;
@@ -23,7 +24,7 @@ public class WindowLogin {
     @FXML
     private TextField txtName;
     @FXML
-    private TextField usupassword;
+    private PasswordField usupassword;
     @FXML
     private Label popUp;
 
@@ -51,19 +52,19 @@ public class WindowLogin {
     /**
      * Crea una venta que contiene al usuario, con acceso a la información, el reproductor y las bibliotecas
      * @param listauser Lista que contiene a los objetos de clase Usuario
-     * @param i Es el índice en donde se encuentra el objeto Usuario ingresado en el metodo cheking
+     * @param numero_usuario Es el índice en donde se encuentra el objeto Usuario ingresado en el metodo cheking
      * @param urlBibliotecas Es el string con la ruta al documento .csv en donde esta la información de las bibliotecas de cada usuario.
      * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      */
     @FXML
-    void showVentanaUsuario(List listauser, Integer i, String urlBibliotecas) throws IOException {
+    void showVentanaUsuario(List listauser, Integer numero_usuario, String urlBibliotecas) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaUsuario.fxml"));
         Parent root = loader.load();
         WindowUsuario controller = loader.getController();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        controller.init_ventanaUsuario(listauser, i, txtName.getText(), usupassword.getText(), urlBibliotecas, stage, this);
+        controller.init_ventanaUsuario(listauser, numero_usuario, txtName.getText(), usupassword.getText(), urlBibliotecas, stage, this);
         stage.show();
         popUp.setText("");
         this.stage1.close();

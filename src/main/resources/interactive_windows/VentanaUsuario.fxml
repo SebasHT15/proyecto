@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -33,7 +34,7 @@
             <Font name="Dubai Regular" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="reproductor" layoutX="238.0" layoutY="330.0" mnemonicParsing="false" onAction="#showVentanaReproductor" text="Reproductor">
+      <Button fx:id="reproductor" layoutX="240.0" layoutY="320.0" mnemonicParsing="false" onAction="#showVentanaReproductor" text="Reproductor">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -53,11 +54,12 @@
             <Image url="@interactive_windows.images/potispo.png" />
          </image>
       </ImageView>
-      <Button layoutX="237.0" layoutY="279.0" mnemonicParsing="false" onAction="#showVentanaBibliotecas" prefHeight="30.0" prefWidth="96.0" text="Bibliotecas">
+      <Button layoutX="240.0" layoutY="358.0" mnemonicParsing="false" onAction="#showVentanaBibliotecas" prefHeight="30.0" prefWidth="96.0" text="Bibliotecas">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <ChoiceBox fx:id="playlist_choice_box" layoutX="240.0" layoutY="272.0" prefHeight="25.0" prefWidth="96.0" />
    </children>
    <effect>
       <ColorAdjust saturation="0.04" />
