@@ -54,14 +54,11 @@ public class WindowReproductor {
     @FXML
     void play() {
         if (playing == false){
-            System.out.println(current.getData().getTitule());
-
             reproductor.play_song(clip);
             playing = true;
 
         }else {
             reproductor.stop_song(clip);
-            System.out.println("Stop");
             playing = false;
         }
     }
@@ -101,6 +98,7 @@ public class WindowReproductor {
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(current.getData().getUrl()));
         this.clip = AudioSystem.getClip();
         clip.open(audioStream);
+        cargar_barra_sonido();
     }
 
     /**
@@ -122,6 +120,7 @@ public class WindowReproductor {
 
         this.clip = AudioSystem.getClip();
         clip.open(audioStream);
+        cargar_barra_sonido();
     }
 
     /**
@@ -138,11 +137,10 @@ public class WindowReproductor {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
-        //Cambiar esto a una variable para que dependa de cada usuario
-        //ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\TestPepe.xml");
+
         ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\"+urlXML+".xml");
-        //
         ReadXML.returnLista();
+
         this.listSongs = ReadXML.returnLista();
         this.listSongs.getFirst().getData().getUrl();
 
@@ -155,7 +153,10 @@ public class WindowReproductor {
         this.clip = AudioSystem.getClip();
 
         clip.open(audioStream);
+        cargar_barra_sonido();
 
+    }
+    void cargar_barra_sonido(){
         this.reproductor.start_fc(clip);
 
         SongName.setText(current.getData().getTitule());
@@ -171,7 +172,6 @@ public class WindowReproductor {
                 reproductor.getFc().setValue((float) volumeSlider.getValue());
             }
         });
-        //this.comprobador_duracion(clip.getFrameLength());
     }
 
     /**
