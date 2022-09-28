@@ -17,7 +17,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
-import javax.sound.sampled.*;
+
+/**
+ * WindowUsuario representa el controlador de la ventana Usuario.
+ * @author Sebastían Hernández Bonilla y Adrián Salas Solís
+ * @version v0.1 septiembre 2022
+ */
 
 public class WindowReproductor {
     private WindowUsuario controllerVentanaUsuario;
@@ -33,18 +38,24 @@ public class WindowReproductor {
     @FXML
     private Slider volumeSlider;
     @FXML
+    /**
+     * Cierra la ventana Reproducto y abre la ventana Usuario.
+     */
     void showVentanaUsuario() {
         controllerVentanaUsuario.show();
         stage.close();
         clip.close();
     }
+
+    /**
+     * Reproduce la canción guardada en el DoubleLinkedNode current.
+     */
     @FXML
     void play() {
         if (playing == false){
             System.out.println(current.getData().getTitule());
 
             reproductor.play_song(clip);
-
             playing = true;
 
         }else {
@@ -53,15 +64,29 @@ public class WindowReproductor {
             playing = false;
         }
     }
+
+    /**
+     * Reinicia la canción guardada en el DoubleLinkedNode current.
+     */
     @FXML
     void reset(){
         reproductor.reset_song(clip);
     }
+
+    /**
+     * Activa la reproducción automatica.
+     */
     @FXML
     void setAutoplayer(){
         autoplayer=!autoplayer;
-
     }
+
+    /**
+     * Pasa a siguiente canción.
+     * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws LineUnavailableException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     void skip() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         if (playing == true){
@@ -76,6 +101,13 @@ public class WindowReproductor {
         this.clip = AudioSystem.getClip();
         clip.open(audioStream);
     }
+
+    /**
+     * Regresa a la canción anterior.
+     * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws LineUnavailableException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     void back() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         if (playing == true){
@@ -90,11 +122,23 @@ public class WindowReproductor {
         this.clip = AudioSystem.getClip();
         clip.open(audioStream);
     }
+
+    /**
+     * Inicializa la ventan Reproductor y la muestra en pantalla.
+     * @param stage Ventana Usuario.
+     * @param ventanaIniController Controlador de venta Usuario.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws LineUnavailableException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void init_ventaReproductor(Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
-        ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\PlayList.xml");
+        //Cambiar esto a una variable para que dependa de cada usuario
+        ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\TestPepe.xml");
         ReadXML.returnLista();
         this.listSongs = ReadXML.returnLista();
         this.listSongs.getFirst().getData().getUrl();
@@ -115,6 +159,10 @@ public class WindowReproductor {
 
         volumeSlider.setValue(reproductor.getFc().getValue());
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
+            /**
+             * Permite la modificación del audio a través de una barra de sonido.
+             * @param observable Barra de sonido.
+             */
             @Override
             public void invalidated(Observable observable) {
                 reproductor.getFc().setValue((float) volumeSlider.getValue());
@@ -122,6 +170,11 @@ public class WindowReproductor {
         });
         //this.comprobador_duracion(clip.getFrameLength());
     }
+
+    /**
+     * Permite saber la duración de la canción
+     * @param segundos Es el integer que marca la duración de la canción.
+     */
     private void comprobador_duracion(int segundos){
         /*Thread.activeCount();
         while (playing==false){

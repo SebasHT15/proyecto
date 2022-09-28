@@ -36,11 +36,16 @@ public class Reader{
             lector = new BufferedReader(new FileReader(nombreArchivo));
             while ((linea = lector.readLine()) != null) {
                 partes = linea.split(",");
+                // Probando el contador de canciones--------------
+                ReadXML.crearCancionesXml(partes[3]); //Crea las canciones con el static de Read xml y se le pasa la url leida en el csv
+                int size = ReadXML.returnLista().getSize(); //Con las canciones creadas llama a las lista que las contiene y guarda la extencion.
+                //-----------------
 
-                Playlist playlist = new Playlist(partes[0], partes[1], Integer.parseInt(partes[2]), partes[3]);
+                Playlist playlist = new Playlist(partes[0], partes[1], size, partes[3]);//Crea un onjeto playlist con la info del csv
                 lista_playlist.add(playlist);
 
                 number_playlist++;
+                ReadXML.returnLista().clear();
             }
 
         } catch (Exception e) {

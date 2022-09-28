@@ -12,6 +12,11 @@ import listClasses.Reader;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *WindowLogin representa el controlador de la ventana Login.
+ *@author Sebastían Hernández Bonilla y Adrián Salas Solís
+ *@version v0.1 septiembre 2022
+ */
 
 public class WindowLogin {
     private Stage stage1;
@@ -21,6 +26,11 @@ public class WindowLogin {
     private TextField usupassword;
     @FXML
     private Label popUp;
+
+    /**
+     * Permite comprobar que el nombre de usuario y la contraseña coincidan
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     public void cheking() throws IOException {
         Reader lectorUsuario = new Reader();
@@ -38,6 +48,13 @@ public class WindowLogin {
         }
     }
 
+    /**
+     * Crea una venta que contiene al usuario, con acceso a la información, el reproductor y las bibliotecas
+     * @param listauser Lista que contiene a los objetos de clase Usuario
+     * @param i Es el índice en donde se encuentra el objeto Usuario ingresado en el metodo cheking
+     * @param urlBibliotecas Es el string con la ruta al documento .csv en donde esta la información de las bibliotecas de cada usuario.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     void showVentanaUsuario(List listauser, Integer i, String urlBibliotecas) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaUsuario.fxml"));
@@ -52,10 +69,17 @@ public class WindowLogin {
         this.stage1.close();
     }
 
+    /**
+     * Cambia el stage de la ventana Inicio por la de ventana Login
+     * @param stage Stage es la ventana Login
+     */
     public void setStage(Stage stage) {
         stage1 = stage;
     }
 
+    /**
+     * Muestra la ventana Inicio
+     */
     public void show(){
         stage1.show();
     }

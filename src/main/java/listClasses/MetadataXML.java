@@ -86,7 +86,7 @@ public class MetadataXML {
        transformer.transform(source, result);
    }
 
-    public static void eliminar_elementoXML(String namePlaylist, CircularDoubleLinkedList listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+    /*public static void eliminar_elementoXML(String namePlaylist, CircularDoubleLinkedList listaSongs, String comparador) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -162,8 +162,8 @@ public class MetadataXML {
 
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.transform(source, result);
-    }
-
+    }*/
+    //Testeo en createNewXML completado
     public static String createNewXML(String namePlaylist) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -177,7 +177,9 @@ public class MetadataXML {
 
         Document leerdocumento = builder.parse(new File("XmlBase.xml"));
 
-        NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
+        //Parece que funciona, eliminar este comentario al final.
+
+        /*NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
 
         Element Song = documento.createElement("Song");
 
@@ -202,10 +204,7 @@ public class MetadataXML {
         Element URL = documento.createElement("URL");
         Song.appendChild(URL);
 
-        PlayList.appendChild(Song);
-
-
-
+        PlayList.appendChild(Song);*/
 
         documento.getDocumentElement().appendChild(PlayList);
 

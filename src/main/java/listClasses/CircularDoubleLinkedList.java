@@ -33,7 +33,7 @@ public class CircularDoubleLinkedList {
         }
         this.size=this.size+1;//Buscar como tener el sisze de una doblememnte enlazada
     }
-    public void delete(Song x) {
+    public void delete2(Song x) {
         DoubleLinkedNode current = new DoubleLinkedNode();
         DoubleLinkedNode previous_temp = new DoubleLinkedNode();
         current = first;
@@ -57,6 +57,7 @@ public class CircularDoubleLinkedList {
             previous_temp = current;
             current = current.next;
         }while (current != first);
+        this.size=this.size-1;
     }
     public void search(Song x){
         DoubleLinkedNode current = new DoubleLinkedNode();
@@ -88,13 +89,13 @@ public class CircularDoubleLinkedList {
         }
     }
 
-    public void delete2(String x) {
+    public void delete(String x) {
         DoubleLinkedNode current = new DoubleLinkedNode();
         DoubleLinkedNode previous_temp = new DoubleLinkedNode();
         current = first;
         previous_temp = last;
         do {
-            if (current.data.getTitule() == x) {
+            if (current.getData().getTitule() == x) {
                 if (current == first){
                     first = first.next;
                     last.next = first;
@@ -112,7 +113,9 @@ public class CircularDoubleLinkedList {
             previous_temp = current;
             current = current.next;
         }while (current != first);
-        size--;
+        System.out.println(current.getData().getTitule());
+
+        this.size=this.size-1;
     }
     public DoubleLinkedNode getFirst() {
         return first;

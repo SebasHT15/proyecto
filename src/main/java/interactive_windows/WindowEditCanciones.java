@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import static listClasses.MetadataXML.RecargarXML;
 
+
 public class WindowEditCanciones {
     private CircularDoubleLinkedList canciones;
     private String biblioteca;
@@ -89,15 +90,17 @@ public class WindowEditCanciones {
         }
     }
     @FXML
-    void deleteSong() throws ParserConfigurationException, IOException, SAXException {
-        System.out.println(canciones.getSize());
+    void deleteSong() throws ParserConfigurationException, IOException, SAXException, TransformerException {
         if(titule.getText()!=""){
-            this.canciones.delete2(titule.getText());
+            //
+            this.canciones.delete(titule.getText());
 
+            RecargarXML(bibliotecaName,canciones);
+            //
             cargarCanciones();
         }else {
             System.out.println("deleteSong WindowEditCanciones");
         }
-        System.out.println(canciones.getSize());
+
     }
 }

@@ -17,34 +17,59 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
+/**
+ * WindowBibliotecas representa el controlador de la ventana Bibliotecas.
+ * @author Sebastían Hernández Bonilla y Adrián Salas Solís
+ * @version v0.1 septiembre 2022
+ */
 public class WindowBibliotecas {
     private WindowUsuario controllerVentanaUsuario;
     private Stage stage;
     private Label[] superlabel;
     private Label[] sublabel;
     private Button[] button;
-
     private String urlBibliotecas;
-
     @FXML
     private VBox label_pane;
     @FXML
     private VBox button_pane;
     @FXML
     private SplitPane pane;
+
+    /**
+     * Cierra la ventana Bibliotecas y abre la ventana Usuario.
+     */
     @FXML
     void showVentanaUsuario2() {
         controllerVentanaUsuario.show();
         stage.close();
     }
 
+    /**
+     * Inicializa y muestra en pantalla la ventana Bibliotecas.
+     * @param urlBibliotecas String que es la ruta que contiene las bibliotecas del usuario con el que se hizo el login.
+     * @param stage Ventana Usuario.
+     * @param ventanaIniController Controlador ventana Usuario.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void init_ventanaBibliotecas(String urlBibliotecas, Stage stage, WindowUsuario ventanaIniController) throws IOException, ParserConfigurationException, SAXException {
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
         this.urlBibliotecas=urlBibliotecas;
         recargar();
-
     }
+
+    /**
+     * Crea una ventana que permite ver y editar las canciones que contiene la biblioteca elegida por el usuario.
+     * @param event Evento que recibe el bóton.
+     * @param BibliotecasUrl Ruta de la biblioteca elegida por el usuario.
+     * @param bibliotecaName String Nombre la biblioteca elegida por el usuario.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     private void handle_print_console(ActionEvent event, String BibliotecasUrl, String bibliotecaName) throws IOException, ParserConfigurationException, SAXException {//Cambiar nomnbre
 
@@ -60,6 +85,11 @@ public class WindowBibliotecas {
         stage.show();
         this.stage.close();
     }
+
+    /**
+     * Crea una ventana que permite añadir o quitar bibliotecas a un usuario.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     void showVentanaEditBibliotecas() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaEditBiblioteca.fxml"));
@@ -72,8 +102,17 @@ public class WindowBibliotecas {
         stage.show();
         this.stage.close();
     }
+
+    /**
+     * Recarga el pane donde estan las bibliotecas para poder ver los cambios realizados.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     void recargar() throws IOException {
+        recargar_logica();
+        recargar_logica();
+    }
+    void recargar_logica() throws IOException {
         label_pane.getChildren().clear();
         button_pane.getChildren().clear();
 
@@ -118,8 +157,12 @@ public class WindowBibliotecas {
                 }
             });
         }
+
     }
 
+    /**
+     * Muestra la ventana.
+     */
     public void show(){
         stage.show();
     }
