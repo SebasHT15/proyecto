@@ -3,9 +3,7 @@ package interactive_windows;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import listClasses.CircularDoubleLinkedList;
 import listClasses.DoubleLinkedNode;
@@ -18,7 +16,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
-
 /**
  * WindowUsuario representa el controlador de la ventana Usuario.
  * @author Sebastían Hernández Bonilla y Adrián Salas Solís
@@ -26,6 +23,9 @@ import java.io.IOException;
  */
 
 public class WindowReproductor {
+    private String response = "";
+
+
     private WindowUsuario controllerVentanaUsuario;
     private Stage stage;
     private Player reproductor;
@@ -35,9 +35,12 @@ public class WindowReproductor {
     private DoubleLinkedNode current;
     private CircularDoubleLinkedList listSongs;
     @FXML
+    private Label labelfavorito;
+    @FXML
     private Label SongName;
     @FXML
     private Slider volumeSlider;
+
     @FXML
     /**
      * Cierra la ventana Reproducto y abre la ventana Usuario.
@@ -133,7 +136,7 @@ public class WindowReproductor {
      * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      * @throws LineUnavailableException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      */
-    public void init_ventaReproductor(String urlXML,Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException {
+    public void init_ventaReproductor(String urlXML,Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
@@ -154,7 +157,6 @@ public class WindowReproductor {
 
         clip.open(audioStream);
         cargar_barra_sonido();
-
     }
     void cargar_barra_sonido(){
         this.reproductor.start_fc(clip);
@@ -173,6 +175,20 @@ public class WindowReproductor {
             }
         });
     }
+    @FXML
+    void activar_favorita(){
+        if (current.getData().getFavorita()==1){
+            current.getData().setFavorita(0);
+        }else {
+            current.getData().setFavorita(1);
+        }
+        if (current.getData().getFavorita()==1){
+            labelfavorito.setText("Favorita");
+        }else {
+            labelfavorito.setText("");
+        }
+        System.out.println(current.getData().getFavorita());
+    }
 
     /**
      * Permite saber la duración de la canción
@@ -189,5 +205,19 @@ public class WindowReproductor {
             Thread.currentThread().interrupt();
         }
         System.out.println("Termine el hilo");
+    }
+    //No funciona
+    void testeo() throws UnsupportedAudioFileException, LineUnavailableException, IOException, InterruptedException {
+        while (!response.equals("Q")){
+            switch (response){
+                case ("S"):
+                    skip();
+                case ("Q"):
+                    break;
+                default:
+                    System.out.println("Respuesta no valida");
+            }
+            wait(400000);
+        }
     }
 }

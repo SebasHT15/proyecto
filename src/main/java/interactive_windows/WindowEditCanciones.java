@@ -76,31 +76,36 @@ public class WindowEditCanciones {
     }
     @FXML
     void addSong() throws ParserConfigurationException, IOException, SAXException, TransformerException {
-        if(titule.getText()!=""){
-            Song nueva_cancion = new Song(titule.getText(),genre.getText(),artist.getText(),album.getText(),year.getText(),lyrics.getText(),url.getText());
-
+        if(titule.getText()!="") {
+            Song nueva_cancion = null;
+            if (bibliotecaName.contains("Favoritas")) {
+                nueva_cancion = new Song(titule.getText(), genre.getText(), artist.getText(), album.getText(), year.getText(), lyrics.getText(), url.getText(), 1);
+            } else {
+                nueva_cancion = new Song(titule.getText(), genre.getText(), artist.getText(), album.getText(), year.getText(), lyrics.getText(), url.getText(), 0);
+            }
             this.canciones.insert(nueva_cancion);
-            System.out.println(bibliotecaName);
 
-            RecargarXML(bibliotecaName,canciones);
+            RecargarXML(bibliotecaName, canciones);
 
             cargarCanciones();
-        }else {
+        }
+        else {
             System.out.println("addSong WindowEditCanciones");
         }
     }
     @FXML
     void deleteSong() throws ParserConfigurationException, IOException, SAXException, TransformerException {
-        if(titule.getText()!=""){
-            //
+
+        if(titule.getText()!="") {
+
             this.canciones.delete(titule.getText());
 
-            RecargarXML(bibliotecaName,canciones);
-            //
-            cargarCanciones();
-        }else {
-            System.out.println("deleteSong WindowEditCanciones");
-        }
+            RecargarXML(bibliotecaName, canciones);
 
+            cargarCanciones();
+        }
+        else {
+            System.out.println("addSong WindowEditCanciones");
+        }
     }
 }

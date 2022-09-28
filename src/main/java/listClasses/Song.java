@@ -8,9 +8,10 @@ public class Song {
     private String year;
     private String lyrics;
     private String url;
+    private Integer favorita;
 
 
-    public Song(String titule,String genre, String artist, String album, String year, String lyrics, String url) {
+    public Song(String titule,String genre, String artist, String album, String year, String lyrics, String url, Integer favorita) {
         this.titule = titule;
         this.genre = genre;
         this.artist = artist;
@@ -18,6 +19,7 @@ public class Song {
         this.year = year;
         this.lyrics = lyrics;
         this.url = url;
+        this.favorita=favorita;
     }
 
     public String getTitule() {return titule;}
@@ -47,4 +49,7 @@ public class Song {
     public String getUrl() {return url;}
 
     public void setUrl(String url) {this.url = url;}
+
+    public Integer getFavorita(){return favorita;}
+    public void setFavorita(int valor){this.favorita = valor;}
 }

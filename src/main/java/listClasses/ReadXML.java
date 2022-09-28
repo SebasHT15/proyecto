@@ -70,7 +70,7 @@ public class ReadXML {
                     }
                 }
                 Song cancion = new Song(atributosSong.get(0), atributosSong.get(1), atributosSong.get(2), atributosSong.get(3),
-                        atributosSong.get(4), atributosSong.get(5), atributosSong.get(6));
+                        atributosSong.get(4), atributosSong.get(5), atributosSong.get(6), Integer.parseInt(atributosSong.get(7)));
                 listaSongs.insert(cancion);
             }
             atributosSong.clear();

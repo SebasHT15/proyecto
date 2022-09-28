@@ -15,7 +15,7 @@ public class TestXML {
         ReadXML.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\TestPepe.xml");
         CircularDoubleLinkedList lista = ReadXML.returnLista();
 
-        Song nueva_cancion = new Song("Zelda","Zelda","Zelda","Zelda","Zelda","Zelda","C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav");
+        Song nueva_cancion = new Song("Zelda","Zelda","Zelda","Zelda","Zelda","Zelda","C:\\Users\\Adrian\\Desktop\\Proyectos\\Canciones\\main.wav",0);
 
         lista.insert(nueva_cancion);
         System.out.println(lista.getSize());

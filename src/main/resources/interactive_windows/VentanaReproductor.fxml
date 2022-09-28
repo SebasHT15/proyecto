@@ -12,7 +12,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interactive_windows.WindowReproductor">
    <children>
       <Button fx:id="Back" layoutX="283.0" layoutY="360.0" mnemonicParsing="false" onAction="#showVentanaUsuario" text="Back" />
-      <ProgressBar layoutX="131.0" layoutY="224.0" prefHeight="18.0" prefWidth="335.0" progress="0.0" />
+      <ProgressBar layoutX="95.0" layoutY="224.0" prefHeight="18.0" prefWidth="323.0" progress="0.0" />
       <Button fx:id="play12" alignment="CENTER" contentDisplay="BOTTOM" layoutX="271.0" layoutY="253.0" mnemonicParsing="false" onAction="#play" prefHeight="47.0" prefWidth="64.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
@@ -49,6 +49,8 @@
          </image>
       </ImageView>
       <Slider fx:id="volumeSlider" blockIncrement="1.0" layoutX="233.0" layoutY="322.0" max="6.0" min="-80.0" value="6.0" />
+      <Button layoutX="430.0" layoutY="221.0" mnemonicParsing="false" onAction="#activar_favorita" prefHeight="14.0" prefWidth="12.0" />
+      <Label fx:id="labelfavorito" layoutX="454.0" layoutY="225.0" prefHeight="17.0" prefWidth="49.0" text="Favorita" />
    </children>
    <effect>
       <ColorAdjust saturation="0.04" />
