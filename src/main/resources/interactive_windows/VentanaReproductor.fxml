@@ -50,7 +50,7 @@
       </ImageView>
       <Slider fx:id="volumeSlider" blockIncrement="1.0" layoutX="233.0" layoutY="322.0" max="6.0" min="-80.0" value="6.0" />
       <Button layoutX="430.0" layoutY="221.0" mnemonicParsing="false" onAction="#activar_favorita" prefHeight="14.0" prefWidth="12.0" />
-      <Label fx:id="labelfavorito" layoutX="454.0" layoutY="225.0" prefHeight="17.0" prefWidth="49.0" text="Favorita" />
+      <Label fx:id="labelfavorito" layoutX="454.0" layoutY="225.0" prefHeight="17.0" prefWidth="49.0" />
    </children>
    <effect>
       <ColorAdjust saturation="0.04" />

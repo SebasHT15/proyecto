@@ -18,30 +18,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetadataXML {
+    /**
+     * Lee un .xml base y crea un nuevo .xml con sus divisiones, rellena el contenido de las divisiones a partir de una CircularDoubleLinkedList y renombra este nuevo .xml con el nombre que se le pasó.
+     * @param namePlaylist String Nombre del xml a recargar.
+     * @param listaSongs CircularDoubleLinkedList lista de canciones que usa para llenar las divisiones del .xml.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws TransformerException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
    public static void RecargarXML(String namePlaylist, CircularDoubleLinkedList listaSongs) throws ParserConfigurationException, TransformerException, IOException, SAXException {
 
-       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); //
        DocumentBuilder builder = factory.newDocumentBuilder();
        DOMImplementation implementation = builder.getDOMImplementation();
 
        Document documento = implementation.createDocument(null, namePlaylist, null);
-       documento.setXmlVersion("1.0");
+       documento.setXmlVersion("1.0");//Version del .xml
 
-       Element PlayList = documento.createElement(namePlaylist);
+       Element PlayList = documento.createElement(namePlaylist);//Nombre dentro del .xml
 
-       Document leerdocumento = builder.parse(new File("XmlBase.xml"));
+       Document leerdocumento = builder.parse(new File("XmlBase.xml")); //Lee el documento .xml base
 
-       NodeList listaCanciones = leerdocumento.getElementsByTagName("Song");
+       NodeList listaCanciones = leerdocumento.getElementsByTagName("Song"); //Entra al nodo song de xml
 
-       DoubleLinkedNode current = listaSongs.getFirst();
+       DoubleLinkedNode current = listaSongs.getFirst(); // Current es el inicio de la lista
 
-       for (int i = 0; i <= listaSongs.getSize()-1; i++){
-           Element Song = documento.createElement("Song");
+       for (int i = 0; i <= listaSongs.getSize()-1; i++){ //For por toda la lista
+           Element Song = documento.createElement("Song"); //Nuevo nodo Song
 
-           Element Titulo = documento.createElement("Titulo");
-           Text textTitulo = documento.createTextNode(current.getData().getTitule());
-           Titulo.appendChild(textTitulo);
-           Song.appendChild(Titulo);
+           Element Titulo = documento.createElement("Titulo"); //Nuevo nodo titulo
+           Text textTitulo = documento.createTextNode(current.getData().getTitule()); //Setea la info del nodo titulo como la info del atributo de song Titule
+           Titulo.appendChild(textTitulo); //Añade la info de la linea anterior al nodo titulo
+           Song.appendChild(Titulo);//Añade al nodo titulo al nodo canción----------------------------Repite esto con cada atributo del objeto Song
 
            Element Genero = documento.createElement("Genero");
            Text textGenero = documento.createTextNode(current.getData().getGenre());
@@ -79,19 +88,30 @@ public class MetadataXML {
            Song.appendChild(Favorita);
 
 
-           PlayList.appendChild(Song);
-           current=current.getNext();
+           PlayList.appendChild(Song);//Añade el nodo song a playlist
+           current=current.getNext(); //Cambia al siguiente nodo de la CircularDoublelinkedlist para leer la siguiente canción
        }
 
-       documento.getDocumentElement().appendChild(PlayList);
+       documento.getDocumentElement().appendChild(PlayList);//Añade la playlist a xml
 
        Source source = new DOMSource(documento);
-       Result result = new StreamResult(new File(namePlaylist + ".xml"));
+       Result result = new StreamResult(new File(namePlaylist + ".xml"));//Guarda el documento como xml
 
        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-       transformer.transform(source, result);
+       transformer.transform(source, result);//Transforma a xml
    }
+
+    /**
+     * Crea un nuevo .xml.
+     * @param namePlaylist Nombre del nuevo .xml.
+     * @return Retorna el .xml.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws TransformerException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public static String createNewXML(String namePlaylist) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+       //Parecido al metodo anterior pero esta vez no añade ninguna song.
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();

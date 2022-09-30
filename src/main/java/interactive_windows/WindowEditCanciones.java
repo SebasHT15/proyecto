@@ -95,17 +95,28 @@ public class WindowEditCanciones {
     }
     @FXML
     void deleteSong() throws ParserConfigurationException, IOException, SAXException, TransformerException {
-
-        if(titule.getText()!="") {
-
-            this.canciones.delete(titule.getText());
-
-            RecargarXML(bibliotecaName, canciones);
-
-            cargarCanciones();
-        }
-        else {
-            System.out.println("addSong WindowEditCanciones");
-        }
+//En general elemina una cancion del xml rehaciendo uno nuevo pero con una nueva lista doblemente enlazada circular
+        DoubleLinkedNode current = canciones.getFirst(); //Crea un nodo temporal para la comparaciones
+        try { //Es para que no se caiga el codigo
+            if (titule.getText()!=""){ //Evita que se corra el codigo si no hay nada en text field
+                while (current!=canciones.getLast()){ //Realiza el loop hasta llegar al ultimo nodo
+                    if (titule.getText().equals(current.getData().getTitule())){ //Comprobacion de que sea el mismo titulo
+                        canciones.delete(current.getData().getTitule());//Borra la cancion con el titulo ingresado
+                        RecargarXML(bibliotecaName,canciones);//"Recarga el xml", en realidad crea uno nuevo lo llama igual que el anterior y elimina este
+                        cargarCanciones(); // Recarga el pane con las canciones
+                        break;// Rompe el ciclo
+                    }else {
+                        current = current.getNext(); //Cambia al siguiente nodo
+                    }
+                }
+                if (current==canciones.getLast()){//Caso en el que la canción a eliminar sea la ultima en la lista
+                    if (titule.getText().equals(current.getData().getTitule())){//Mismo proceso anterior
+                        canciones.delete(current.getData().getTitule());
+                        RecargarXML(bibliotecaName,canciones);
+                        cargarCanciones();
+                    }
+                }
+            }
+        }catch (Exception e){}
     }
 }

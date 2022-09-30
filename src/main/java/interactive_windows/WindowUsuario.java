@@ -63,7 +63,7 @@ public class WindowUsuario {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            controller.init_ventaReproductor(playlist_choice_box.getValue(),stage, this);
+            controller.init_ventaReproductor(listauser.get(numero_usuario).getUser(), playlist_choice_box.getValue(),stage, this);
             stage.show();
             this.stage.close();
         } catch (Exception e){

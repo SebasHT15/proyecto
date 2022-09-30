@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadXML {
+public class ReadXMLFavorita {
     private static CircularDoubleLinkedList listaSongs = new CircularDoubleLinkedList();
     private static List<String> atributosSong = new ArrayList<>();
 
