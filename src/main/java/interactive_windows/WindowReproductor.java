@@ -1,7 +1,9 @@
 package interactive_windows;
 
+import Arduino.PortManager;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -46,7 +48,7 @@ public class WindowReproductor {
     /**
      * Cierra la ventana Reproducto y abre la ventana Usuario.
      */
-    void showVentanaUsuario() {
+    void showVentanaUsuario() throws InterruptedException {
         controllerVentanaUsuario.show();
         stage.close();
         clip.close();
@@ -79,8 +81,15 @@ public class WindowReproductor {
      * Activa la reproducción automatica.
      */
     @FXML
-    void setAutoplayer() {
-        autoplayer = !autoplayer;
+    void setAutoplayer(ActionEvent event) throws IOException {
+        if (autoplayer == true){
+            PortManager.getInstance().SendData("1");
+            autoplayer = !autoplayer;
+        }else{
+            PortManager.getInstance().SendData("2");
+            autoplayer = !autoplayer;
+        }
+
     }
 
     /**
@@ -153,18 +162,19 @@ public class WindowReproductor {
      * @throws LineUnavailableException      Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      */
     public void init_ventaReproductor(String nameUser, String XMLname, Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
-
+        PortManager port = PortManager.getInstance();
+        port.start();
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
         this.nameUser = nameUser;
 
         this.XMLname = XMLname;
-        ReadXMLFavorita.crearCancionesXml("C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\" + this.nameUser + "Favoritas.xml");
+        ReadXMLFavorita.crearCancionesXml("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\ProyectoMain\\" + this.nameUser + "Favoritas.xml");
         ReadXMLFavorita.returnLista();
         this.listFavoritas = ReadXMLFavorita.returnLista();
         ReadXMLFavorita.clearLista();
 
-        this.currentXML = "C:\\Users\\Adrian\\Desktop\\Proyectos\\Proyecto_prueba\\" + XMLname + ".xml";
+        this.currentXML = "C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\ProyectoMain\\" + XMLname + ".xml";
 
         ReadXML.crearCancionesXml(currentXML);
         ReadXML.returnLista();
@@ -184,8 +194,10 @@ public class WindowReproductor {
 
         if (current.getData().getFavorita() == 1) {
             labelfavorito.setText("Favorita");
+            //PortManager.getInstance().SendData("3");
         } else {
             labelfavorito.setText("");
+            //PortManager.getInstance().SendData("4");
         }
         cargar_barra_sonido();
     }
@@ -215,9 +227,11 @@ public class WindowReproductor {
         if (current.getData().getFavorita() == 0) { // Pregunta si es favorita (0→no y 1→si)
             current.getData().setFavorita(1); //La vuelve favorita
             labelfavorito.setText("Favorita");
+            PortManager.getInstance().SendData("4");
         } else { // Si es favorita
             current.getData().setFavorita(0);// La vuelve no favorita
             labelfavorito.setText("");
+            PortManager.getInstance().SendData("3");
         }
         //--------------
         DoubleLinkedNode temp = new DoubleLinkedNode();
@@ -241,6 +255,33 @@ public class WindowReproductor {
         RecargarXML(nameUser + "Favoritas", listFavoritas);
         RecargarXML(XMLname, listSongs);
         //Bug se crean mas canciones en la playlist de la que se sacan los favoritos
+    }
+
+    public void salidaArduino(Integer variableChange) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        if(variableChange == 30){
+            skip();
+        }else if(variableChange == 25){
+            back();
+        }else if(variableChange == 35){
+            play();
+        }else if(variableChange >= 0 && variableChange <80){
+            reproductor.getFc().setValue(-80);
+
+        }else if(variableChange >= 80 && variableChange <146){
+            reproductor.getFc().setValue(-63);
+
+        }else if(variableChange >= 146 && variableChange <292){
+            reproductor.getFc().setValue(-46);
+
+        }else if(variableChange >= 292 && variableChange <438){
+            reproductor.getFc().setValue(-29);
+
+        }else if(variableChange >= 438 && variableChange <584){
+            reproductor.getFc().setValue(-12);
+
+        }else if(variableChange >= 584 && variableChange <730){
+            reproductor.getFc().setValue(6);
+        }
     }
 
 }
