@@ -104,7 +104,7 @@ public class WindowBibliotecas {
     }
 
     /**
-     * Recarga el pane donde estan las bibliotecas para poder ver los cambios realizados.
+     * Llama a recarga lógica 2 veces para solucionar un error.
      * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      */
     @FXML
@@ -112,6 +112,10 @@ public class WindowBibliotecas {
         recargar_logica();
         recargar_logica();
     }
+    /**
+     * Recarga el pane donde estan las bibliotecas para poder ver los cambios realizados.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     void recargar_logica() throws IOException {
         label_pane.getChildren().clear();
         button_pane.getChildren().clear();

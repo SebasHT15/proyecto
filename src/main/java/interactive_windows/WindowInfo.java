@@ -39,7 +39,7 @@ public class WindowInfo {
      * @param ventanaIniController Controlador ventana Usuario.
      */
     public void init_ventanaInfo(Stage stage, String user, String name, String email, String province, WindowUsuario ventanaIniController) {
-        userID.setText(user);
+        userID.setText(user);// Muestra la metadata del ususario.
         nameID.setText(name);
         emailID.setText(email);
         provinceID.setText(province);

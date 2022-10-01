@@ -34,12 +34,12 @@ public class WindowLogin {
      */
     @FXML
     public void cheking() throws IOException {
-        Reader lectorUsuario = new Reader();
+        Reader lectorUsuario = new Reader(); //Crea un lector csv que crea los objetos usuarios, recibe la ruta del csv.
         lectorUsuario.crear_usuario("C:\\Users\\sebas\\OneDrive\\Escritorio\\TEC\\Semestre 2\\Datos 1\\ProyectoMain\\proyecto\\usuarios.csv");
         //Esto es mal, hacer mejor usuaro y meterlo en lista
 
         for(int i = 0; i <= lectorUsuario.lista_usuarios.size()-1; i++){
-            if (txtName.getText().equals(lectorUsuario.lista_usuarios.get(i).getUser()) && usupassword.getText().equals(lectorUsuario.lista_usuarios.get(i).getPassword())){
+            if (txtName.getText().equals(lectorUsuario.lista_usuarios.get(i).getUser()) && usupassword.getText().equals(lectorUsuario.lista_usuarios.get(i).getPassword())){//Busca en los usuarioes hasta encontrar uno en el que el nombre y la contraseña coincida con los ingresados.
                 showVentanaUsuario(lectorUsuario.lista_usuarios, i, lectorUsuario.lista_usuarios.get(i).getUrlBibliotecas());
                 break;
 

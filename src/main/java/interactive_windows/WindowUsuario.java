@@ -1,13 +1,11 @@
 package interactive_windows;
 
-import Arduino.PortManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import listClasses.Reader;
 import listClasses.Usuario;

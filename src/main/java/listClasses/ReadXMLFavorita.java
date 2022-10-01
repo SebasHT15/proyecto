@@ -16,37 +16,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Lee la informacion de un xml diseñado para canciones favoritas.
+ * @author Sebastían Hernández Bonilla y Adrián Salas Solís
+ * @version v0.1 septiembre 2022
+ */
 public class ReadXMLFavorita {
     private static CircularDoubleLinkedList listaSongs = new CircularDoubleLinkedList();
     private static List<String> atributosSong = new ArrayList<>();
 
-    public static void leerXml(String filepath) throws ParserConfigurationException, IOException, SAXException {
-
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-
-        Document documento = builder.parse(new File(filepath));
-
-        NodeList listaCanciones = documento.getElementsByTagName("Song");
-
-        for (int i = 0; i < listaCanciones.getLength(); i++){
-            Node nodo = listaCanciones.item(i);
-
-            if (nodo.getNodeType() == Node.ELEMENT_NODE){
-                Element e = (Element)nodo;
-                NodeList hijos = e.getChildNodes();
-                for (int j = 0; j < hijos.getLength(); j++){
-                    Node hijo = hijos.item(j);
-                    if (hijo.getNodeType() == Node.ELEMENT_NODE){
-                        //System.out.println(hijo.getNodeName() + " " + hijo.getTextContent());
-                        atributosSong.add(hijo.getTextContent());
-                    }
-                }
-
-            }
-            atributosSong.clear();
-        }
-    }
+    /**
+     * Lee un xml diseñado para canciones favoritas y crea objetos Songs que guarda en una lista de favoritas.
+     * @param filepath Url del xml a leer.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public static void crearCancionesXml(String filepath) throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -77,8 +62,16 @@ public class ReadXMLFavorita {
         }
     }
 
+    /**
+     * Retorna la lista con los objetos Song favoritas.
+     * @return Array canciones favoritas.
+     */
     public static CircularDoubleLinkedList returnLista(){
         return listaSongs;
     }
+
+    /**
+     * Limpia la lista de canciones favoritas.
+     */
     public static void clearLista(){listaSongs.clear();}
 }

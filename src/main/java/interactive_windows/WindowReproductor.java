@@ -1,10 +1,8 @@
 package interactive_windows;
 
-import Arduino.PortManager;
 import com.fazecast.jSerialComm.SerialPort;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -103,7 +101,6 @@ public class WindowReproductor {
 
     /**
      * Pasa a siguiente canción.
-     *
      * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      * @throws IOException                   Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      * @throws LineUnavailableException      Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
@@ -132,7 +129,6 @@ public class WindowReproductor {
 
     /**
      * Regresa a la canción anterior.
-     *
      * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      * @throws IOException                   Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      * @throws LineUnavailableException      Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
@@ -215,10 +211,13 @@ public class WindowReproductor {
         cargar_barra_sonido();
     }
 
+    /**
+     * Inicia el controlador del sonido y crea una barra de sonido.
+     */
     void cargar_barra_sonido() {
-        this.reproductor.start_fc(clip);
+        this.reproductor.start_fc(clip);//Inicia el controlador
 
-        SongName.setText(current.getData().getTitule());
+        SongName.setText(current.getData().getTitule()); //Carga el label con el nombre de la canción
 
         volumeSlider.setValue(reproductor.getFc().getValue());
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
@@ -233,6 +232,14 @@ public class WindowReproductor {
         });
     }
 
+    /**
+     *
+     * Activa si el favorita en una canción.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws TransformerException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     void activar_favorita() throws ParserConfigurationException, IOException, TransformerException, SAXException {
         //------------Convertir de a favorita o revertir
@@ -271,6 +278,13 @@ public class WindowReproductor {
         //Bug se crean mas canciones en la playlist de la que se sacan los favoritos
     }
 
+    /**
+     * Recibe el dato que manda arduino y hace comparativas para saber a que metodo llamar.
+     * @param variableChange Integer dato del arduino.
+     * @throws UnsupportedAudioFileException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws LineUnavailableException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void salidaArduino(Integer variableChange) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         System.out.println(variableChange);
         if(variableChange == 30){
@@ -301,6 +315,9 @@ public class WindowReproductor {
         }
     }
 
+    /**
+     * Crea un thread que inicia el puerto y llama los datos de arduino.
+     */
     public void test(){
         (new Thread(() -> {
             port.openPort();
@@ -310,6 +327,7 @@ public class WindowReproductor {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            //Esto debería hacer la llamada al metodo con los datos enviados de arduino
             /*try {
                 salidaArduino(GetData());
             } catch (UnsupportedAudioFileException e) {
@@ -321,11 +339,22 @@ public class WindowReproductor {
             }*/
         })).start();
     }
+
+    /**
+     * Manda la data a arduino.
+     * @param string Dato enviado.
+     * @throws IOException
+     */
     public void SendData(String string) throws IOException {
         port.getOutputStream().write(string.getBytes());
         port.getOutputStream().flush();
     }
 
+    /**
+     * Recibe la data de arduino.
+     * @return Retorna la data del arduino.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public int GetData() throws IOException {
         Scanner data = new Scanner(port.getInputStream());
         int value = 0;

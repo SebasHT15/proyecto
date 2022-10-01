@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Lee un csv que se le manda para crear usuarios o bibliotecas
+ * @author Sebastían Hernández Bonilla y Adrián Salas Solís
+ * @version v0.1 septiembre 2022
+ */
 public class Reader{
     private Integer number_playlist = 0;
     private BufferedReader lector;
@@ -15,6 +20,11 @@ public class Reader{
     public List<Usuario> lista_usuarios = new ArrayList();
     public List<Playlist> lista_playlist = new ArrayList<>();
 
+    /**
+     * Lee el csv que se le manda y crea una lista de usuarios con este.
+     * @param nombreArchivo Url del csv de los usuarios.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void crear_usuario(String nombreArchivo) throws IOException {
         try {
             lector = new BufferedReader(new FileReader(nombreArchivo));
@@ -31,6 +41,12 @@ public class Reader{
         }
         lector.close();
     }
+
+    /**
+     * Lee el csv que se le manda y crea una lista de bibliotecas.
+     * @param nombreArchivo Url del csv de las bibliotecas.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void crear_bibliotecas(String nombreArchivo) throws IOException {
         try {
             lector = new BufferedReader(new FileReader(nombreArchivo));

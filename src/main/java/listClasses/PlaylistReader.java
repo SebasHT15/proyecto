@@ -2,12 +2,22 @@ package listClasses;
 
 import java.io.*;
 
+/**
+ * Lee archivos csv que modifican las bibliotecas.
+ * @author Sebastían Hernández Bonilla y Adrián Salas Solís
+ * @version v0.1 septiembre 2022
+ */
 public class PlaylistReader {
     private static String linea;
     private static String[] partes = null;
 
     private static BufferedReader bufferedReader;
 
+    /**
+     * Borra una biblioteca.
+     * @param filepath Url del csv de las bibliotecas.
+     * @param editTerm Nombre de la biblioteca a eliminar.
+     */
     public static void deletePlaylist(String filepath, String editTerm){
         String tempFile = "temp.csv" ;
         File oldFile = new File(filepath) ;
@@ -54,6 +64,15 @@ public class PlaylistReader {
             System.out.println(e);
         }
     }
+
+    /**
+     * Añade una biblioteca.
+     * @param filepath Url del csv de las bibliotecas.
+     * @param newName Nombre de la nueva biblioteca.
+     * @param newDate Fecha de creación.
+     * @param newNumber_songs Número de canciones que tiene la biblioteca.
+     * @param newUrl
+     */
     public static void addPlaylist(String filepath, String newName, String newDate, String newNumber_songs, String newUrl){
         String tempFile = "biblio.csv" ;
         File oldFile = new File(filepath) ;

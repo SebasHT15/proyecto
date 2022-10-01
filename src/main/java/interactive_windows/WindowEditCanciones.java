@@ -17,7 +17,10 @@ import java.io.IOException;
 
 import static listClasses.MetadataXML.RecargarXML;
 
-
+/**
+ * @author Sebastían Hernández Bonilla y Adrián Salas Solís
+ * @version v0.1 septiembre 2022
+ */
 public class WindowEditCanciones {
     private CircularDoubleLinkedList canciones;
     private String biblioteca;
@@ -41,11 +44,25 @@ public class WindowEditCanciones {
     @FXML
     private TextField url;
 
+    /**
+     * Cierra la venta edit Canciones y abre la de bibliotecas.
+     */
     @FXML
     void showVentanaBibliotecas(){
         controllerVentanaBibliotecas.show();
         stage.close();
     }
+
+    /**
+     * Inicializa la ventana de edit canciones.
+     * @param BibliotecasUrl String Url de la biblioteca del usuario actual.
+     * @param bibliotecaName String Nombre de la biblioteca del usuario actual.
+     * @param stage Stage ventana.
+     * @param ventanaIniController Controller controlador de la ventana.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     public void init_ventaEditCanciones(String BibliotecasUrl,String bibliotecaName, Stage stage, WindowBibliotecas ventanaIniController) throws ParserConfigurationException, IOException, SAXException {
         this.controllerVentanaBibliotecas = ventanaIniController;
         this.stage = stage;
@@ -56,43 +73,66 @@ public class WindowEditCanciones {
 
         cargarCanciones();
     }
+
+    /**
+     *
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     void cargarCanciones() throws ParserConfigurationException, IOException, SAXException {
-        songPane.getChildren().clear();
+        songPane.getChildren().clear(); //Limpia el pane en donde estan las canciones
         ReadXML.returnLista().clear();
 
         ReadXML.crearCancionesXml(biblioteca);
 
-        this.canciones = ReadXML.returnLista();
+        this.canciones = ReadXML.returnLista();//Retorna la lista de canciones leida en el xml
 
-        Label[] labelsSongs = new Label[canciones.getSize()];
-        DoubleLinkedNode current = canciones.getFirst();
+        Label[] labelsSongs = new Label[canciones.getSize()]; //Crea un array de labels
+        DoubleLinkedNode current = canciones.getFirst(); //Crea un node current a recorrer
 
         for (int i = 0; i <canciones.getSize(); i++){
-            labelsSongs[i] = new Label();
-            songPane.getChildren().add(labelsSongs[i]);
-            labelsSongs[i].setText(current.getData().getTitule());
-            current=current.getNext();
+            labelsSongs[i] = new Label();//Nuevo label del array de labels
+            songPane.getChildren().add(labelsSongs[i]); //Añade el label a pane
+            labelsSongs[i].setText(current.getData().getTitule());//Setea el nombre de la canción en el label.
+            current=current.getNext();//Pasa a la siguiente canción.
         }
     }
+
+    /**
+     * Añade al xml de la playlist una nueva canción.
+     * @throws ParserConfigurationException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws IOException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws SAXException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     * @throws TransformerException Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
+     */
     @FXML
     void addSong() throws ParserConfigurationException, IOException, SAXException, TransformerException {
-        if(titule.getText()!="") {
+        if(titule.getText()!="") { //Para que no se accione si no hay nada.
             Song nueva_cancion = null;
-            if (bibliotecaName.contains("Favoritas")) {
-                nueva_cancion = new Song(titule.getText(), genre.getText(), artist.getText(), album.getText(), year.getText(), lyrics.getText(), url.getText(), 1);
+            if (bibliotecaName.contains("Favoritas")) {//Para añadir en favoritas
+                nueva_cancion = new Song(titule.getText(), genre.getText(), artist.getText(), album.getText(), year.getText(), lyrics.getText(), url.getText(), 1);//Favoritas se añade como 1 para saber que es favorita
             } else {
                 nueva_cancion = new Song(titule.getText(), genre.getText(), artist.getText(), album.getText(), year.getText(), lyrics.getText(), url.getText(), 0);
             }
-            this.canciones.insert(nueva_cancion);
+            this.canciones.insert(nueva_cancion);//Inserta la canción creada.
 
-            RecargarXML(bibliotecaName, canciones);
+            RecargarXML(bibliotecaName, canciones); //Actualiza el xml.
 
-            cargarCanciones();
+            cargarCanciones();//Lla a cargar canciones para que se mueste la actualización en la ventana.
         }
         else {
             System.out.println("addSong WindowEditCanciones");
         }
     }
+
+    /**
+     * Elimina una canción del xml.
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     * @throws TransformerException
+     */
     @FXML
     void deleteSong() throws ParserConfigurationException, IOException, SAXException, TransformerException {
 //En general elemina una cancion del xml rehaciendo uno nuevo pero con una nueva lista doblemente enlazada circular

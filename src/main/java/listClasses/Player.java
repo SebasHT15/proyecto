@@ -2,6 +2,7 @@ package listClasses;
 import javax.sound.sampled.*;
 
 /**
+ * Crea un objeto capaz de reproducir sonidos de archivos .wav.
  * @author Sebastían Hernández Bonilla y Adrián Salas Solís
  * @version v0.1 septiembre 2022
  */
