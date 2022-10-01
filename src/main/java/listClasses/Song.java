@@ -123,7 +123,7 @@ public class Song {
 
     /**
      * Retorna si es canción favorita.
-     * @retur 1 si es favorita 0 si no.
+     * @return 1 si es favorita 0 si no.
      */
     public Integer getFavorita(){return favorita;}
 
