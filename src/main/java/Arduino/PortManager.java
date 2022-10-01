@@ -1,6 +1,7 @@
 package Arduino;
 
 import com.fazecast.jSerialComm.SerialPort;
+import interactive_windows.WindowReproductor;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,7 +22,19 @@ public class PortManager extends Thread{
     public void run(){
         port.openPort();
         port.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+        /*try {
+            GetData();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
+    }
 
+    public void SendData(String string) throws IOException {
+        port.getOutputStream().write(string.getBytes());
+        port.getOutputStream().flush();
+    }
+
+    public int GetData() throws IOException {
         Scanner data = new Scanner(port.getInputStream());
         int value = 0;
 
@@ -30,19 +43,8 @@ public class PortManager extends Thread{
             catch(Exception e){
 
             }
-            System.out.println(value);
+            //System.out.println(value);
         }
-    }
-
-    public void SendData(String string) throws IOException {
-        port.getOutputStream().write(string.getBytes());
-        port.getOutputStream().flush();
-    }
-
-    public Integer GetData() throws IOException {
-        port.getInputStream().read();
-        port.getInputStream().reset();
-        int Arduino = port.getInputStream().read();
-        return Arduino;
+        return value;
     }
 }

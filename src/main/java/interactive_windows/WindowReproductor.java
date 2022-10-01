@@ -1,8 +1,10 @@
 package interactive_windows;
 
 import Arduino.PortManager;
+import com.fazecast.jSerialComm.SerialPort;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,6 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import static listClasses.MetadataXML.RecargarXML;
 
@@ -44,6 +47,8 @@ public class WindowReproductor {
     @FXML
     private Slider volumeSlider;
 
+    private SerialPort port = SerialPort.getCommPort("COM3");
+
     @FXML
     /**
      * Cierra la ventana Reproducto y abre la ventana Usuario.
@@ -58,7 +63,7 @@ public class WindowReproductor {
      * Reproduce la canción guardada en el DoubleLinkedNode current.
      */
     @FXML
-    void play() {
+    public void play() {
         if (playing == false) {
             reproductor.play_song(clip);
             playing = true;
@@ -83,10 +88,14 @@ public class WindowReproductor {
     @FXML
     void setAutoplayer(ActionEvent event) throws IOException {
         if (autoplayer == true){
-            PortManager.getInstance().SendData("1");
+            //PortManager.getInstance().SendData("1");
+            SendData("1");
+
             autoplayer = !autoplayer;
         }else{
-            PortManager.getInstance().SendData("2");
+            //PortManager.getInstance().SendData("2");
+            SendData("2");
+
             autoplayer = !autoplayer;
         }
 
@@ -162,8 +171,8 @@ public class WindowReproductor {
      * @throws LineUnavailableException      Hará una llamada Exception y lanzará la exepción correspondiente al encontrarlo.
      */
     public void init_ventaReproductor(String nameUser, String XMLname, Stage stage, WindowUsuario ventanaIniController) throws ParserConfigurationException, IOException, SAXException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
-        PortManager port = PortManager.getInstance();
-        port.start();
+        //port.start();
+        test();
         this.controllerVentanaUsuario = ventanaIniController;
         this.stage = stage;
         this.nameUser = nameUser;
@@ -195,9 +204,13 @@ public class WindowReproductor {
         if (current.getData().getFavorita() == 1) {
             labelfavorito.setText("Favorita");
             //PortManager.getInstance().SendData("3");
+            SendData("3");
+
         } else {
             labelfavorito.setText("");
             //PortManager.getInstance().SendData("4");
+            SendData("4");
+
         }
         cargar_barra_sonido();
     }
@@ -227,11 +240,12 @@ public class WindowReproductor {
         if (current.getData().getFavorita() == 0) { // Pregunta si es favorita (0→no y 1→si)
             current.getData().setFavorita(1); //La vuelve favorita
             labelfavorito.setText("Favorita");
-            PortManager.getInstance().SendData("4");
+            //PortManager.getInstance().SendData("3");
+            SendData("3");
         } else { // Si es favorita
             current.getData().setFavorita(0);// La vuelve no favorita
             labelfavorito.setText("");
-            PortManager.getInstance().SendData("3");
+            SendData("4");
         }
         //--------------
         DoubleLinkedNode temp = new DoubleLinkedNode();
@@ -258,6 +272,7 @@ public class WindowReproductor {
     }
 
     public void salidaArduino(Integer variableChange) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        System.out.println(variableChange);
         if(variableChange == 30){
             skip();
         }else if(variableChange == 25){
@@ -281,8 +296,48 @@ public class WindowReproductor {
 
         }else if(variableChange >= 584 && variableChange <730){
             reproductor.getFc().setValue(6);
+        }else{
+            System.out.println(variableChange);
         }
     }
 
+    public void test(){
+        (new Thread(() -> {
+            port.openPort();
+            port.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+            try {
+                GetData();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            /*try {
+                salidaArduino(GetData());
+            } catch (UnsupportedAudioFileException e) {
+                throw new RuntimeException(e);
+            } catch (LineUnavailableException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }*/
+        })).start();
+    }
+    public void SendData(String string) throws IOException {
+        port.getOutputStream().write(string.getBytes());
+        port.getOutputStream().flush();
+    }
+
+    public int GetData() throws IOException {
+        Scanner data = new Scanner(port.getInputStream());
+        int value = 0;
+
+        while(data.hasNextLine()){
+            try{value = Integer.parseInt(data.nextLine());}
+            catch(Exception e){
+
+            }
+            System.out.println(value);
+        }
+        return value;
+    }
 }
 
